@@ -19,7 +19,7 @@ export type BikeJourney = {
   duration: number // in seconds
 }
 
-export const parseCsv = (headers: string[], csvFile: string): BikeJourney[] =>
+export const parseCsv = (headers: string[], csvFile: string) =>
   parse(csvFile, {
     delimiter: ',',
     columns: headers,
@@ -47,7 +47,7 @@ export const parseFileJournies = (fileName: string) => {
   ]
 
   const file = getCsvFile('data/journies', fileName)
-  const result = parseCsv(headers, file)
+  const result: BikeJourney[] = parseCsv(headers, file)
 
   return result.filter(journeyIsValid)
 }
@@ -65,7 +65,65 @@ const journeySchema = {
   distance: { type: 'number', min: 10, convert: true },
 }
 
+const stationSchema = {
+  fid: { type: 'number', convert: true },
+  id: { type: 'number', convert: true },
+  nameInFinnish: { type: 'string' },
+  nameInSwedish: { type: 'string' },
+  nameInEnglish: { type: 'string' },
+  addressInFinnish: { type: 'string' },
+  addressInSwedish: { type: 'string' },
+  cityInFinnish: { type: 'string' },
+  cityInSwedish: { type: 'string' },
+  operator: { type: 'string' },
+  capasity: { type: 'number', convert: true },
+  x: { type: 'number', convert: true },
+  y: { type: 'number', convert: true },
+}
+
 const validateJourney = v.compile(journeySchema)
+const validateStation = v.compile(stationSchema)
 
 const journeyIsValid = (journey: BikeJourney) =>
   typeof validateJourney(journey) === 'boolean'
+
+const stationIsValid = (station: StationInfo) =>
+  typeof validateStation(station) === 'boolean'
+
+export type StationInfo = {
+  fid: number
+  id: number
+  nameInFinnish: string
+  nameInSwedish: string
+  nameInEnglish: string
+  addressInFinnish: string
+  addressInSwedish: string
+  cityInFinnish: string
+  cityInSwedish: string
+  operator: string
+  capasity: number
+  x: number
+  y: number
+}
+
+export const parseStations = () => {
+  const headers = [
+    'fid',
+    'id',
+    'nameInFinnish',
+    'nameInSwedish',
+    'nameInEnglish',
+    'addressInFinnish',
+    'addressInSwedish',
+    'cityInFinnish',
+    'cityInSwedish',
+    'operator',
+    'capasity',
+    'x',
+    'y',
+  ]
+  const file = getCsvFile('data/stations', 'helsinki-espoo-stations.csv')
+  const result: StationInfo[] = parseCsv(headers, file)
+
+  return result.filter(stationIsValid)
+}
