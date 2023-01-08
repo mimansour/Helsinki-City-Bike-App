@@ -16,7 +16,7 @@ export const parseCsv = (headers: string[], csvFile: string) =>
     columns: headers,
   })
 
-export const parseJourniesFromCsv = () => {
+export const parseJournies = () => {
   const files = ['2021-05.csv', '2021-06.csv', '2021-07.csv']
 
   return files.reduce(
@@ -58,7 +58,7 @@ const journeySchema = {
 
 const stationSchema = {
   fid: { type: 'number', convert: true },
-  id: { type: 'number', convert: true },
+  stationId: { type: 'number', convert: true },
   nameInFinnish: { type: 'string' },
   nameInSwedish: { type: 'string' },
   nameInEnglish: { type: 'string' },
@@ -84,7 +84,7 @@ const stationIsValid = (station: BikeStation) =>
 export const parseStations = () => {
   const headers = [
     'fid',
-    'id',
+    'stationId',
     'nameInFinnish',
     'nameInSwedish',
     'nameInEnglish',
