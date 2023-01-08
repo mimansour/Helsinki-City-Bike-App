@@ -17,7 +17,13 @@ export const parseCsv = (headers: string[], csvFile: string) =>
   })
 
 export const parseJournies = () => {
-  const files = ['2021-05.csv', '2021-06.csv', '2021-07.csv']
+  const files = [
+    '2021-05.csv',
+    '2021-06-part1.csv',
+    '2021-06-part2.csv',
+    '2021-07-part1.csv',
+    '2021-07-part2.csv',
+  ]
 
   return files.reduce(
     (journies, file) => [...journies, ...parseFileJournies(file)],
