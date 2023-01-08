@@ -10,7 +10,7 @@ export default function Home() {
           content="Helsinki City Bike App to display usage statistics."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/bike-icon.png" />
       </Head>
       <main>
         <p>To be developed.</p>
