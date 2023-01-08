@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@next/font": "13.1.1",
+    "@prisma/client": "^4.8.1",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
@@ -19,8 +20,8 @@
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
     "fastest-validator": "^1.16.0",
-    "mongodb": "^4.13.0",
     "next": "13.1.1",
+    "prisma": "^4.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.4"
@@ -31,5 +32,8 @@
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "tailwindcss": "^3.2.4"
+  },
+  "prisma": {
+    "schema": "lib/db/schema.prisma"
   }
 }
