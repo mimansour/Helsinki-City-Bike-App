@@ -8,20 +8,20 @@ datasource db {
 }
 
 model Station {
-  fid              Int
-  id               String @id @default(auto()) @map("_id") @db.ObjectId
-  stationId        Int    @unique
-  nameInFinnish    String
-  nameInSwedish    String
-  nameInEnglish    String
-  addressInFinnish String
-  addressInSwedish String
-  cityInFinnish    String
-  cityInSwedish    String
-  operator         String
-  capacity         Int
-  x                Float
-  y                Float
+  fid       Int
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  stationId Int    @unique
+  nameFi    String
+  nameSv    String
+  nameEn    String
+  addressFi String
+  addressSv String
+  cityFi    String
+  citySv    String
+  operator  String
+  capacity  Int
+  x         Float
+  y         Float
 }
 
 model Journey {

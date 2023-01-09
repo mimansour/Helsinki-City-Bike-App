@@ -1,20 +1,31 @@
-import * as fs from 'fs'
+import fs from 'fs'
 import path from 'path'
 import { parse } from 'csv-parse/sync'
 import Validator from 'fastest-validator'
 import { BikeStation } from '../types/station'
 import { BikeJourney } from '../types/journey'
 
-export const getCsvFile = (dir: string, filePath: string) => {
-  const dirPath = path.join(process.cwd(), dir)
-  return fs.readFileSync(`${dirPath}/${filePath}`, 'utf8')
-}
+export const parseStations = () => {
+  const headers = [
+    'fid',
+    'stationId',
+    'nameFi',
+    'nameSv',
+    'nameEn',
+    'addressFi',
+    'addressSv',
+    'cityFi',
+    'citySv',
+    'operator',
+    'capacity',
+    'x',
+    'y',
+  ]
+  const file = getCsvFile('data/stations', 'helsinki-espoo-stations.csv')
+  const result: BikeStation[] = parseCsv(headers, file)
 
-export const parseCsv = (headers: string[], csvFile: string) =>
-  parse(csvFile, {
-    delimiter: ',',
-    columns: headers,
-  })
+  return result.filter(stationIsValid)
+}
 
 export const parseJournies = () => {
   const files = [
@@ -49,37 +60,16 @@ export const parseFileJournies = (fileName: string) => {
   return result.filter(journeyIsValid)
 }
 
-const v = new Validator()
-
-const journeySchema = {
-  departureDate: { type: 'date', convert: true },
-  returnDate: { type: 'date', convert: true },
-  departureStationId: { type: 'string', min: 3 },
-  departureStationName: { type: 'string' },
-  returnStationId: { type: 'string', min: 3 },
-  returnStationName: { type: 'string' },
-  duration: { type: 'number', min: 10, convert: true },
-  distance: { type: 'number', min: 10, convert: true },
+const getCsvFile = (dir: string, filePath: string) => {
+  const dirPath = path.join(process.cwd(), dir)
+  return fs.readFileSync(`${dirPath}/${filePath}`, 'utf8')
 }
 
-const stationSchema = {
-  fid: { type: 'number', convert: true },
-  stationId: { type: 'number', convert: true },
-  nameInFinnish: { type: 'string' },
-  nameInSwedish: { type: 'string' },
-  nameInEnglish: { type: 'string' },
-  addressInFinnish: { type: 'string' },
-  addressInSwedish: { type: 'string' },
-  cityInFinnish: { type: 'string' },
-  cityInSwedish: { type: 'string' },
-  operator: { type: 'string' },
-  capacity: { type: 'number', convert: true },
-  x: { type: 'number', convert: true },
-  y: { type: 'number', convert: true },
-}
-
-const validateJourney = v.compile(journeySchema)
-const validateStation = v.compile(stationSchema)
+const parseCsv = (headers: string[], csvFile: string) =>
+  parse(csvFile, {
+    delimiter: ',',
+    columns: headers,
+  })
 
 const journeyIsValid = (journey: BikeJourney) =>
   typeof validateJourney(journey) === 'boolean'
@@ -87,24 +77,34 @@ const journeyIsValid = (journey: BikeJourney) =>
 const stationIsValid = (station: BikeStation) =>
   typeof validateStation(station) === 'boolean'
 
-export const parseStations = () => {
-  const headers = [
-    'fid',
-    'stationId',
-    'nameInFinnish',
-    'nameInSwedish',
-    'nameInEnglish',
-    'addressInFinnish',
-    'addressInSwedish',
-    'cityInFinnish',
-    'cityInSwedish',
-    'operator',
-    'capacity',
-    'x',
-    'y',
-  ]
-  const file = getCsvFile('data/stations', 'helsinki-espoo-stations.csv')
-  const result: BikeStation[] = parseCsv(headers, file)
+const validator = new Validator()
 
-  return result.filter(stationIsValid)
+const journeySchema = {
+  departureDate: { type: 'date', convert: true },
+  returnDate: { type: 'date', convert: true },
+  departureStationId: { type: 'string', min: 1 },
+  departureStationName: { type: 'string', min: 1 },
+  returnStationId: { type: 'string', min: 1 },
+  returnStationName: { type: 'string', min: 1 },
+  duration: { type: 'number', min: 10, convert: true },
+  distance: { type: 'number', min: 10, convert: true },
 }
+
+const stationSchema = {
+  fid: { type: 'number', convert: true, positive: true },
+  stationId: { type: 'number', convert: true, positive: true },
+  nameFi: { type: 'string', min: 1 },
+  nameSv: { type: 'string', min: 1 },
+  nameEn: { type: 'string', min: 1 },
+  addressFi: { type: 'string', min: 1 },
+  addressSv: { type: 'string', min: 1 },
+  cityFi: { type: 'string', min: 1 },
+  citySv: { type: 'string', min: 1 },
+  operator: { type: 'string', min: 1 },
+  capacity: { type: 'number', convert: true, positive: true },
+  x: { type: 'number', convert: true, positive: true },
+  y: { type: 'number', convert: true, positive: true },
+}
+
+const validateJourney = validator.compile(journeySchema)
+const validateStation = validator.compile(stationSchema)

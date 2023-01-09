@@ -1,13 +1,13 @@
 export type BikeStation = {
   fid: number
   stationId: number
-  nameInFinnish: string
-  nameInSwedish: string
-  nameInEnglish: string
-  addressInFinnish: string
-  addressInSwedish: string
-  cityInFinnish: string
-  cityInSwedish: string
+  nameFi: string
+  nameSv: string
+  nameEn: string
+  addressFi: string
+  addressSv: string
+  cityFi: string
+  citySv: string
   operator: string
   capacity: number
   x: number
