@@ -92,7 +92,7 @@ const journeySchema = {
 
 const stationSchema = {
   fid: { type: 'number', convert: true, positive: true },
-  stationId: { type: 'number', convert: true, positive: true },
+  stationId: { type: 'string', min: 1 },
   nameFi: { type: 'string', min: 1 },
   nameSv: { type: 'string', min: 1 },
   nameEn: { type: 'string', min: 1 },

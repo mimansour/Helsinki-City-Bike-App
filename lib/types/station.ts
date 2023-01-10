@@ -1,6 +1,6 @@
 export type BikeStation = {
   fid: number
-  stationId: number
+  stationId: string
   nameFi: string
   nameSv: string
   nameEn: string

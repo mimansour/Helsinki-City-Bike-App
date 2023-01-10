@@ -10,7 +10,7 @@ datasource db {
 model Station {
   fid       Int
   id        String @id @default(auto()) @map("_id") @db.ObjectId
-  stationId Int    @unique
+  stationId String @unique
   nameFi    String
   nameSv    String
   nameEn    String
