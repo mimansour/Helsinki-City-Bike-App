@@ -21,8 +21,8 @@ describe('csv utils', () => {
     it('parses valid rows', () => {
       readFileSyncSpy.mockReturnValueOnce(
         `${stationCsvFileHeader}
-1,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
+1,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
 `
       )
       expect(parseStations()).toHaveLength(2)
@@ -31,19 +31,19 @@ describe('csv utils', () => {
     it('filtes rows without required fields', () => {
       readFileSyncSpy.mockReturnValueOnce(
         `${stationCsvFileHeader}
-,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
+,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
 4,,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
-4,201,,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
-4,201,Test1,,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
-4,201,Test1,Test2,,Test4,Test5,Test6,Test7,Test8,1,2,3
-4,201,Test1,Test2,Test3,,Test5,Test6,Test7,Test8,1,2,3
-4,201,Test1,Test2,Test3,Test4,,Test6,Test7,Test8,1,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,,Test7,Test8,1,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,,Test8,1,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,,1,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,`
+4,Test,,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
+4,Test,Test1,,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
+4,Test,Test1,Test2,,Test4,Test5,Test6,Test7,Test8,1,2,3
+4,Test,Test1,Test2,Test3,,Test5,Test6,Test7,Test8,1,2,3
+4,Test,Test1,Test2,Test3,Test4,,Test6,Test7,Test8,1,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,,Test7,Test8,1,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,,Test8,1,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,,1,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,`
       )
       expect(parseStations()).toHaveLength(0)
     })
@@ -51,11 +51,10 @@ describe('csv utils', () => {
     it('filter rows without positive number', () => {
       readFileSyncSpy.mockReturnValueOnce(
         `${stationCsvFileHeader}
--1,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
-4,-1,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,-1,2,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,-1,3
-4,201,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,-1
+-1,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,-1,2,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,-1,3
+4,Test,Test1,Test2,Test3,Test4,Test5,Test6,Test7,Test8,1,2,-1
 `
       )
       expect(parseStations()).toHaveLength(0)
