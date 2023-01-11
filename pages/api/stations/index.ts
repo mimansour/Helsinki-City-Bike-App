@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getAllStations } from '../../../lib/db/station'
+import { getAllStations } from 'lib/db/station'
 
 type Data = {}
 
