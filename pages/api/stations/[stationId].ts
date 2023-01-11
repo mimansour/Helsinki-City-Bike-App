@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getStationById } from '../../../lib/db/station'
-import { getJourneyStatsByStation } from '../../../lib/db/journey'
+import { getStationById } from 'lib/db/station'
+import { getJourneyStatsByStation } from 'lib/db/journey'
 
 type Data = {}
 

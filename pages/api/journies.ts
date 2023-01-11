@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getAllJournies } from '../../lib/db/journey'
+import { getAllJournies } from 'lib/db/journey'
 
 type Data = {}
 
