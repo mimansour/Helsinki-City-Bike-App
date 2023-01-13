@@ -1,19 +1,28 @@
-import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Home() {
+  const linkStyle = 'px-3 hover:text-amber-500'
+
   return (
     <>
-      <Head>
-        <title>Helsinki City Bike App</title>
-        <meta
-          name="description"
-          content="Helsinki City Bike App to display usage statistics."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/bike-icon.png" />
-      </Head>
-      <main>
-        <p>To be developed.</p>
+      <main className="pt-32 pb-72 flex flex-col justify-center items-center gap-y-6 text-center">
+        <h1 className="text-2xl font-bold">
+          Welcome to Helsinki City Bike App!
+        </h1>
+        <h3 className="w-3/5">
+          Helsinki City Bike App contains statistics about the bicycle stations
+          and journies in the Helsinki metropolitan area.
+        </h3>
+        <strong>Get started here:</strong>
+        <div>
+          <Link href="/stations" className={linkStyle}>
+            Stations
+          </Link>{' '}
+          -{' '}
+          <Link href="/journies" className={linkStyle}>
+            Journies
+          </Link>
+        </div>
       </main>
     </>
   )
