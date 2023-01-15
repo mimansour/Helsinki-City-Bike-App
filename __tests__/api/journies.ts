@@ -3,9 +3,9 @@ import { testJournies, testJourniesJsonData } from 'fixtures/journies'
 import * as Journey from 'lib/db/journey'
 import journiesHandler from 'pages/api/journies'
 
-jest.mock('../lib/db/journey', () => ({
+jest.mock('../../lib/db/journey', () => ({
   __esModule: true,
-  ...jest.requireActual('../lib/db/journey'),
+  ...jest.requireActual('../../lib/db/journey'),
 }))
 
 describe('journies api', () => {
