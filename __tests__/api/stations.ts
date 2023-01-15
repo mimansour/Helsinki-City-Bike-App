@@ -6,14 +6,14 @@ import * as Station from 'lib/db/station'
 import * as Journey from 'lib/db/journey'
 import stationsHandler from 'pages/api/stations'
 
-jest.mock('../lib/db/station', () => ({
+jest.mock('../../lib/db/station', () => ({
   __esModule: true,
-  ...jest.requireActual('../lib/db/station'),
+  ...jest.requireActual('../../lib/db/station'),
 }))
 
-jest.mock('../lib/db/journey', () => ({
+jest.mock('../../lib/db/journey', () => ({
   __esModule: true,
-  ...jest.requireActual('../lib/db/journey'),
+  ...jest.requireActual('../../lib/db/journey'),
 }))
 
 describe('station apis', () => {
