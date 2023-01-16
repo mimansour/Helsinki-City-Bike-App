@@ -13,3 +13,23 @@ export type BikeStation = {
   x: number
   y: number
 }
+
+export type BikeStationStats = {
+  station: BikeStation
+  stats: {
+    returnStations: {
+      averageDistance: number
+      totalJournies: number
+      topPopularStations: {
+        departureStationName: string
+      }[]
+    }
+    departureStations: {
+      averageDistance: number
+      totalJournies: number
+      topPopularStations: {
+        returnStationName: string
+      }[]
+    }
+  }
+}

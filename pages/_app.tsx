@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
           content="Helsinki City Bike App to display usage statistics."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="./bike-favicon.ico" />
+        <link rel="icon" href="/bike-favicon.ico" />
       </Head>
       <Component {...pageProps} />
     </Layout>
