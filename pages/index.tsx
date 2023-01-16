@@ -9,10 +9,10 @@ export default function Home() {
         <h1 className="text-2xl font-bold">
           Welcome to Helsinki City Bike App!
         </h1>
-        <h3 className="w-3/5">
+        <p className="w-3/5">
           Helsinki City Bike App contains statistics about the bicycle stations
           and journies in the Helsinki metropolitan area.
-        </h3>
+        </p>
         <strong>Get started here:</strong>
         <div>
           <Link href="/stations" className={linkStyle}>

@@ -22,10 +22,7 @@ describe('station apis', () => {
 
   describe('station id api', () => {
     it('returns 200 with station data based on id', async () => {
-      const stats = {
-        returnStations: testStats,
-        departureStations: testStats,
-      }
+      const stats = testStats
 
       getStationByIdSpy.mockImplementation(() => Promise.resolve(testStationA))
       getJourneyStatsSpy.mockImplementation(() => Promise.resolve(stats))
