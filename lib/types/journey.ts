@@ -1,3 +1,5 @@
+import { Journey } from '@prisma/client'
+
 export type BikeJourney = {
   departureDate: string
   returnDate: string
@@ -7,4 +9,13 @@ export type BikeJourney = {
   returnStationName: string
   distance: number // in meters
   duration: number // in seconds
+}
+
+export type BikeJourneyPage = {
+  journies: Journey[]
+  params: {
+    skip?: number
+    sortByHeader?: string
+    filterBy?: string
+  }
 }
