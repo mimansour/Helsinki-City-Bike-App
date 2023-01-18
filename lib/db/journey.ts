@@ -1,3 +1,4 @@
+import { Journey } from '@prisma/client'
 import { BikeJourney, BikeJourneyPage } from '../types/journey'
 import { parseJournies } from '../utils/csv'
 import prisma from './prisma'
@@ -11,16 +12,14 @@ export const addBikeJourneyDataToDb = async () => {
   })
 }
 
-export const getAllJournies = async (params: {
-  skip?: number
-  sortByHeader?: string
-  filterBy?: string
-}): Promise<BikeJourneyPage> => {
+export const getAllJournies = async (
+  params: BikeJourneyPage['params']
+): Promise<Journey[]> => {
   const { skip, sortByHeader, filterBy } = params
   const PAGE_SIZE = 10
 
   const journies = await prisma.journey.findMany({
-    ...(skip && { skip: skip }),
+    ...(skip && { skip: skip * PAGE_SIZE }),
     take: PAGE_SIZE,
     ...(sortByHeader && {
       orderBy: {
@@ -47,12 +46,7 @@ export const getAllJournies = async (params: {
     }),
   })
 
-  journies.map(
-    (journey) =>
-      (journey.distance = Number((journey.distance * 0.001).toFixed(2)))
-  )
-
-  return { journies, params: {} }
+  return journies
 }
 
 export const getJourneyStatsByStation = async (stationId: string) => {
@@ -121,10 +115,9 @@ export const getStatsByStationType = async (
   })
 
   const { _avg, _count } = aggregate
-  const avgDistanceInKm = _avg.distance! * 0.001
 
   return {
-    averageDistance: Number(avgDistanceInKm.toFixed(2)),
+    averageDistance: _avg.distance,
     totalJournies: _count[type] as number,
     topPopularStations: topPopularStations as
       | { departureStationName: string }[]
