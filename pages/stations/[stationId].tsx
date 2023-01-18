@@ -1,5 +1,5 @@
-import { BikeStationStats } from '@/lib/types/station'
-import { fromMetersToKm } from '@/lib/utils/journey'
+import { BikeStationStats } from 'lib/types/station'
+import { fromMetersToKm } from 'lib/utils/journey'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 

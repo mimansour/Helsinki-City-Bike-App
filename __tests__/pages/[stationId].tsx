@@ -3,6 +3,7 @@ import { testStationA } from 'fixtures/stations'
 import '@testing-library/jest-dom/extend-expect'
 import StationView from 'pages/stations/[stationId]'
 import { testStats } from 'fixtures/journies'
+import { fromMetersToKm } from 'lib/utils/journey'
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -46,7 +47,9 @@ describe('Single station page', () => {
     expect(totalDepartureJournies).toBeDefined()
 
     const avgDistanceDeparture = screen.getByText(
-      `The average distance: ${stationWithStats.stats.departureStations.averageDistance} km`
+      `The average distance: ${fromMetersToKm(
+        stationWithStats.stats.departureStations.averageDistance
+      )} km`
     )
     expect(avgDistanceDeparture).toBeDefined()
 
@@ -56,7 +59,9 @@ describe('Single station page', () => {
     expect(totalReturnJournies).toBeDefined()
 
     const avgDistanceReturn = screen.getByText(
-      `The average distance: ${stationWithStats.stats.returnStations.averageDistance} km`
+      `The average distance: ${fromMetersToKm(
+        stationWithStats.stats.returnStations.averageDistance
+      )} km`
     )
     expect(avgDistanceReturn).toBeDefined()
 

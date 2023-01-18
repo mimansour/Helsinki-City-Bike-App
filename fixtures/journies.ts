@@ -2,7 +2,7 @@ import { Journey } from '@prisma/client'
 
 export const testStats = {
   returnStations: {
-    averageDistance: 110,
+    averageDistance: 111,
     totalJournies: 111,
     topPopularStations: [
       { departureStationName: 'Test1' },
@@ -13,7 +13,7 @@ export const testStats = {
     ],
   },
   departureStations: {
-    averageDistance: 112,
+    averageDistance: 222,
     totalJournies: 113,
     topPopularStations: [
       { returnStationName: 'Test6' },
