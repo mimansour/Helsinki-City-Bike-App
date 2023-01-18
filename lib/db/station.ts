@@ -17,5 +17,5 @@ export const getStationById = async (id: string) => {
 }
 
 export const getAllStations = async () => {
-  return await prisma.station.findMany({ take: 10 })
+  return await prisma.station.findMany({})
 }
