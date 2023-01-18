@@ -11,11 +11,8 @@ export type BikeJourney = {
   duration: number // in seconds
 }
 
-export type BikeJourneyPage = {
-  journies: Journey[]
-  params: {
-    skip?: number
-    sortByHeader?: string
-    filterBy?: string
-  }
+export type BikeJourneyParams = {
+  skip: number
+  sortByHeader?: string
+  filterBy?: string
 }

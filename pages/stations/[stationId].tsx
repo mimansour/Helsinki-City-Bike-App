@@ -1,4 +1,5 @@
 import { BikeStationStats } from '@/lib/types/station'
+import { fromMetersToKm } from '@/lib/utils/journey'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 
@@ -6,7 +7,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const stationId = context.query['stationId']
   const url = `http://localhost:3000/api/stations/${stationId}`
   const res = await fetch(url)
-  const stations = await res.json()
+  const stations: BikeStationStats = await res.json()
 
   return {
     props: {
@@ -28,6 +29,13 @@ function StationView({
     return null
   }
 
+  const departureAvgDistance = fromMetersToKm(
+    stationWithStats.stats.departureStations.averageDistance
+  )
+  const returnAvgDistance = fromMetersToKm(
+    stationWithStats.stats.returnStations.averageDistance
+  )
+
   return (
     <div className="flex flex-col pt-16 pb-28 gap-2 text-center">
       <h2 className="font-bold text-xl py-2">
@@ -44,7 +52,7 @@ function StationView({
         </div>
         <div>
           {`The average distance:
-        ${stationWithStats.stats.departureStations.averageDistance} km`}
+        ${departureAvgDistance} km`}
         </div>
         <h3>Five most popular stations where journey ended:</h3>
         <ul>
@@ -65,7 +73,7 @@ function StationView({
         </div>
         <div>
           {`The average distance:
-        ${stationWithStats.stats.returnStations.averageDistance} km`}
+        ${returnAvgDistance} km`}
         </div>
         <h3>Five most popular stations where journey started:</h3>
         <ul>

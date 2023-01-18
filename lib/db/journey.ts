@@ -1,5 +1,5 @@
 import { Journey } from '@prisma/client'
-import { BikeJourney, BikeJourneyPage } from '../types/journey'
+import { BikeJourney, BikeJourneyParams } from '../types/journey'
 import { parseJournies } from '../utils/csv'
 import prisma from './prisma'
 
@@ -13,7 +13,7 @@ export const addBikeJourneyDataToDb = async () => {
 }
 
 export const getAllJournies = async (
-  params: BikeJourneyPage['params']
+  params: BikeJourneyParams
 ): Promise<Journey[]> => {
   const { skip, sortByHeader, filterBy } = params
   const PAGE_SIZE = 10
