@@ -22,10 +22,8 @@ describe('station apis', () => {
 
   describe('station id api', () => {
     it('returns 200 with station data based on id', async () => {
-      const stats = testStats
-
       getStationByIdSpy.mockImplementation(() => Promise.resolve(testStationA))
-      getJourneyStatsSpy.mockImplementation(() => Promise.resolve(stats))
+      getJourneyStatsSpy.mockImplementation(() => Promise.resolve(testStats))
 
       const stationId = '501'
 
@@ -41,7 +39,7 @@ describe('station apis', () => {
       expect(res._getStatusCode()).toBe(200)
       expect(JSON.parse(res._getData())).toEqual({
         station: testStationA,
-        stats,
+        stats: testStats,
       })
       expect(getStationByIdSpy).toHaveBeenCalledWith(stationId)
       expect(getJourneyStatsSpy).toHaveBeenCalledWith(stationId)

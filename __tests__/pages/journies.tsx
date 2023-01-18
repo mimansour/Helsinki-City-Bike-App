@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import Journies from 'pages/journies'
-import { testJourniesJsonData } from 'fixtures/journies'
+import { testJournies, testJourniesJsonData } from 'fixtures/journies'
+import { fromMetersToKm, fromSecToMin } from 'lib/utils/journey'
 
 describe('Journies page', () => {
   beforeEach(() => {
-    render(<Journies journies={testJourniesJsonData} />)
+    render(<Journies journies={testJournies} />)
   })
 
   it('renders title', () => {
@@ -51,12 +52,12 @@ describe('Journies page', () => {
       expect(returnStationNameCell).toBeInTheDocument()
 
       const distanceCell = screen.getByRole('cell', {
-        name: journey.distance.toString(),
+        name: fromMetersToKm(journey.distance).toString(),
       })
       expect(distanceCell).toBeInTheDocument()
 
       const durationCell = screen.getByRole('cell', {
-        name: journey.duration.toString(),
+        name: fromSecToMin(journey.duration).toString(),
       })
       expect(durationCell).toBeInTheDocument()
     })

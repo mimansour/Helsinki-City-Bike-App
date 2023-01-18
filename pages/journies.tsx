@@ -5,7 +5,7 @@ import { createColumnHelper } from 'components/StationsTable'
 import { useCallback, useState } from 'react'
 import Image from 'next/image'
 import searchIcon from '../public/search.svg'
-import { fromMetersToKm, fromSecToMin } from '@/lib/utils/journey'
+import { fromMetersToKm, fromSecToMin } from 'lib/utils/journey'
 
 const columnHelper = createColumnHelper<Journey>()
 
