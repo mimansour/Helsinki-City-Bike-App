@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react'
 import Image from 'next/image'
 import searchIcon from '../public/search.svg'
 import { fromMetersToKm, fromSecToMin } from 'lib/utils/journey'
+import { getAllJournies } from 'lib/db/journey'
 
 const columnHelper = createColumnHelper<Journey>()
 
@@ -39,9 +40,7 @@ const columns = [
 ]
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/journies')
-
-  const journies: Journey[] = await res.json()
+  const journies = await getAllJournies({ skip: 0, filterBy: '' })
 
   return { props: { journies } }
 }

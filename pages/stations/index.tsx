@@ -1,3 +1,4 @@
+import { getAllStations } from 'lib/db/station'
 import { BikeStation } from '@/lib/types/station'
 import StationsTable, { createColumnHelper } from 'components/StationsTable'
 import Link from 'next/link'
@@ -23,8 +24,7 @@ const columns = [
 ]
 
 export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:3000/api/stations`)
-  const stations = await res.json()
+  const stations = await getAllStations()
 
   return { props: { stations } }
 }

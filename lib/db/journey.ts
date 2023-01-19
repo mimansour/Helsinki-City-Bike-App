@@ -1,4 +1,3 @@
-import { Journey } from '@prisma/client'
 import { BikeJourney, BikeJourneyParams } from '../types/journey'
 import { parseJournies } from '../utils/csv'
 import prisma from './prisma'
@@ -14,7 +13,7 @@ export const addBikeJourneyDataToDb = async () => {
 
 export const getAllJournies = async (
   params: BikeJourneyParams
-): Promise<Journey[]> => {
+): Promise<BikeJourney[]> => {
   const { skip, sortByHeader, filterBy } = params
   const PAGE_SIZE = 10
 
@@ -46,7 +45,11 @@ export const getAllJournies = async (
     }),
   })
 
-  return journies
+  return journies.map(({ departureDate, returnDate, ...rest }) => ({
+    departureDate: departureDate.toISOString(),
+    returnDate: returnDate.toISOString(),
+    ...rest,
+  }))
 }
 
 export const getJourneyStatsByStation = async (stationId: string) => {

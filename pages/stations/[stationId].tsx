@@ -1,3 +1,5 @@
+import { getJourneyStatsByStation } from 'lib/db/journey'
+import { getStationById } from 'lib/db/station'
 import { BikeStationStats } from 'lib/types/station'
 import { fromMetersToKm } from 'lib/utils/journey'
 import { GetServerSideProps } from 'next'
@@ -5,27 +7,40 @@ import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const stationId = context.query['stationId']
-  const url = `http://localhost:3000/api/stations/${stationId}`
-  const res = await fetch(url)
-  const stations: BikeStationStats = await res.json()
+
+  if (typeof stationId === 'string') {
+    const station = await getStationById(stationId)
+
+    if (station) {
+      const stats = await getJourneyStatsByStation(stationId)
+
+      return {
+        props: {
+          stationWithStats: {
+            station,
+            stats,
+          },
+        },
+      }
+    }
+  }
 
   return {
-    props: {
-      stationWithStats: stations,
-    },
+    props: {},
   }
 }
+
 export const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
 function StationView({
   stationWithStats,
 }: {
-  stationWithStats: BikeStationStats
+  stationWithStats?: BikeStationStats
 }) {
   const router = useRouter()
   const { stationId } = router.query
 
-  if (!stationId) {
+  if (!stationId || !stationWithStats) {
     return null
   }
 
