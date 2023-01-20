@@ -1,15 +1,7 @@
+import { Prisma } from '@prisma/client'
 import { BikeJourney, BikeJourneyParams } from '../types/journey'
 import { parseJournies } from '../utils/csv'
 import prisma from './prisma'
-
-export const addBikeJourneyDataToDb = async () => {
-  const journies = parseJournies()
-  // Get only first 100000 due to limited free cloud database storage.
-  const sampleJournies = journies.slice(0, 100000)
-  return await prisma.journey.createMany({
-    data: sampleJournies,
-  })
-}
 
 export const getAllJournies = async (
   params: BikeJourneyParams
@@ -31,13 +23,11 @@ export const getAllJournies = async (
           {
             departureStationName: {
               contains: filterBy,
-              mode: 'insensitive',
             },
           },
           {
             returnStationName: {
               contains: filterBy,
-              mode: 'insensitive',
             },
           },
         ],
@@ -126,4 +116,65 @@ export const getStatsByStationType = async (
       | { departureStationName: string }[]
       | { returnStationName: string }[],
   }
+}
+
+export const addBikeJourneyDataToDb = async () => {
+  const journies = parseJournies()
+  console.log('Journies parsed successfully!')
+
+  const CHUNK_SIZE = 20000
+  const journiesChunks = journies.reduce((chunks, journey, index) => {
+    const chunkIndex = Math.floor(index / CHUNK_SIZE)
+
+    const isNewChunk = !chunks[chunkIndex]
+
+    if (isNewChunk) {
+      chunks[chunkIndex] = []
+    }
+
+    chunks[chunkIndex].push(journey)
+
+    return chunks
+  }, [] as BikeJourney[][])
+
+  console.log(
+    `Adding ${journies.length} journies in ${journiesChunks.length} chunks.`
+  )
+
+  for await (const [index, chunk] of journiesChunks.entries()) {
+    await insertManyJournies(chunk)
+    console.log(`Chunk ${index + 1} / ${journiesChunks.length} is added`)
+  }
+
+  console.log('Journies saved to DB successfully!')
+}
+
+const insertManyJournies = (journies: BikeJourney[]) => {
+  return prisma.$executeRaw`
+  INSERT INTO "Journey" ("departureDate", "returnDate", "departureStationId", "departureStationName", "returnStationId", "returnStationName" , "duration", "distance")
+  VALUES
+  ${Prisma.join(
+    journies.map(
+      ({
+        departureDate,
+        returnDate,
+        departureStationId,
+        departureStationName,
+        returnStationId,
+        returnStationName,
+        distance,
+        duration,
+      }) =>
+        Prisma.sql`(${Prisma.join([
+          departureDate,
+          returnDate,
+          departureStationId,
+          departureStationName,
+          returnStationId,
+          returnStationName,
+          duration,
+          distance,
+        ])})`
+    )
+  )};`
 }
