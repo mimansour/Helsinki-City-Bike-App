@@ -27,7 +27,7 @@ export const testStats = {
 
 export const testJournies = [
   {
-    id: '63bd6fb093149a28d7ab57e2',
+    id: 1,
     departureDate: new Date('2021-05-31T20:57:25.000Z'),
     returnDate: new Date('2021-05-31T21:05:46.000Z'),
     departureStationId: '094',
@@ -38,7 +38,7 @@ export const testJournies = [
     distance: 2043,
   },
   {
-    id: '63bd6fb093149a28d7ab57e3',
+    id: 2,
     departureDate: new Date('2021-05-31T20:56:59.000Z'),
     returnDate: new Date('2021-05-31T21:07:14.000Z'),
     departureStationId: '082',
