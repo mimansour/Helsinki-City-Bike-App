@@ -6,7 +6,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/lib/*": ["lib/*"],
+      "@/lib/*": ["lib/*"]
     },
     "strict": true,
     "forceConsistentCasingInFileNames": true,
