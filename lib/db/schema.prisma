@@ -3,13 +3,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./sqlite.db"
 }
 
 model Station {
-  fid       Int
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  fid Int
+  id  Int @id @default(autoincrement())
+
   stationId String @unique
   nameFi    String
   nameSv    String
@@ -25,7 +26,7 @@ model Station {
 }
 
 model Journey {
-  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                   Int      @id @default(autoincrement())
   departureDate        DateTime
   returnDate           DateTime
   departureStationId   String
