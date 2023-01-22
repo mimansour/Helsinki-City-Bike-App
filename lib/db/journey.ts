@@ -142,8 +142,15 @@ export const addBikeJourneyDataToDb = async () => {
   )
 
   for await (const [index, chunk] of journiesChunks.entries()) {
-    await insertManyJournies(chunk)
-    console.log(`Chunk ${index + 1} / ${journiesChunks.length} is added`)
+    try {
+      await insertManyJournies(chunk)
+      console.log(`Chunk ${index + 1} / ${journiesChunks.length} is added`)
+    } catch (error) {
+      console.log(
+        `Saving chunk ${index + 1} / ${journiesChunks.length} failed!`
+      )
+      console.error(error)
+    }
   }
 
   console.log('Journies saved to DB successfully!')
