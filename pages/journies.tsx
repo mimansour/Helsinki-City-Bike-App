@@ -55,7 +55,7 @@ export default function Journies({ journies }: { journies: Journey[] }) {
 
   const getJournies = useCallback(
     async (newParams: BikeJourneyParams) => {
-      const url = `http://localhost:3000/api/journies?skip=${newParams.skip}${
+      const url = `/api/journies?skip=${newParams.skip}${
         newParams.sortByHeader ? `&sortByHeader=` + newParams.sortByHeader : ''
       }${newParams.filterBy!.length ? `&filterBy=` + newParams.filterBy : ''}`
 

@@ -11,11 +11,16 @@ export const addBikeStationDataToDb = async () => {
 
   console.log(`Adding ${stations.length} stations.`)
 
-  const createdStations = await prisma.$transaction(stationsCreateQueries)
+  try {
+    const createdStations = await prisma.$transaction(stationsCreateQueries)
 
-  console.log('Stations saved to DB successfully!')
+    console.log('Stations saved to DB successfully!')
 
-  return createdStations
+    return createdStations
+  } catch (error) {
+    console.log('Saving stations to DB failed.')
+    console.error(error)
+  }
 }
 
 export const getStationById = async (id: string) => {
