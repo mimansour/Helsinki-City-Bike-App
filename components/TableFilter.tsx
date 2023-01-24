@@ -3,51 +3,21 @@ import { Column, Table as ReactTable } from '@tanstack/react-table'
 
 function TableFilter({
   column,
-  table,
+  headerId,
 }: {
   column: Column<any, any>
-  table: ReactTable<any>
+  headerId: string
 }) {
-  const firstValue = table
-    .getPreFilteredRowModel()
-    .flatRows[0]?.getValue(column.id)
-
   const columnFilterValue = column.getFilterValue()
 
-  return typeof firstValue === 'number' ? (
-    <div className="flex space-x-2">
-      <input
-        type="number"
-        value={(columnFilterValue as [number, number])?.[0] ?? ''}
-        onChange={(e) =>
-          column.setFilterValue((old: [number, number]) => [
-            e.target.value,
-            old?.[1],
-          ])
-        }
-        placeholder={`Min`}
-        className="w-24 border shadow rounded"
-      />
-      <input
-        type="number"
-        value={(columnFilterValue as [number, number])?.[1] ?? ''}
-        onChange={(e) =>
-          column.setFilterValue((old: [number, number]) => [
-            old?.[0],
-            e.target.value,
-          ])
-        }
-        placeholder={`Max`}
-        className="w-24 border shadow rounded"
-      />
-    </div>
-  ) : (
+  return (
     <input
       type="text"
       value={(columnFilterValue ?? '') as string}
       onChange={(e) => column.setFilterValue(e.target.value)}
       placeholder={`Search...`}
-      className="w-36 border shadow rounded"
+      id={headerId}
+      className="pl-2 w-36 text-sm font-normal text-gray-900 border shadow rounded-lg border-gray-300 focus:ring-amber-700 focus:border-amber-700 focus:outline-none focus:border-2"
     />
   )
 }

@@ -25,8 +25,8 @@ export default function JourniesTable<T extends {}>({
 
   return (
     <div>
-      <table className="text-left text-gray-500">
-        <thead className="text-sm text-gray-700 uppercase bg-gray-50">
+      <table className="text-left text-gray-500 shadow-lg">
+        <thead className="text-sm text-gray-700 uppercase bg-gray-100">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -42,7 +42,10 @@ export default function JourniesTable<T extends {}>({
                         header.getContext()
                       )}
 
-                      <button onClick={() => onSorting(header.id)}>
+                      <button
+                        data-test-id={header.id}
+                        onClick={() => onSorting(header.id)}
+                      >
                         <Image
                           alt=""
                           src={arrowIcon}

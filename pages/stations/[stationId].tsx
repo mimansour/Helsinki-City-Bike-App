@@ -52,7 +52,7 @@ function StationView({
   )
 
   return (
-    <div className="flex flex-col pt-16 pb-28 gap-2 text-center">
+    <div className="flex flex-col gap-2 text-center">
       <h2 className="font-bold text-xl py-2">
         {stationWithStats.station.nameFi}
       </h2>
@@ -60,16 +60,18 @@ function StationView({
         Station address: {stationWithStats.station.addressFi}
       </div>
       <div className="py-4">
-        <strong>Journies starting from the station:</strong>
-        <div>
+        <strong className="uppercase text-sm">
+          Journies starting from the station
+        </strong>
+        <div className="pt-2">
           Total journies:{' '}
           {stationWithStats.stats.departureStations.totalJournies}
         </div>
-        <div>
+        <div className="pb-4">
           {`The average distance:
         ${departureAvgDistance} km`}
         </div>
-        <h3>Five most popular stations where journey ended:</h3>
+        <u>Five most popular stations where journey ended:</u>
         <ul>
           {stationWithStats.stats.departureStations.topPopularStations.map(
             (station: { returnStationName: string }) => (
@@ -82,15 +84,17 @@ function StationView({
       </div>
 
       <div className="py-4">
-        <strong>Journies ending at the station:</strong>
-        <div>
+        <strong className="uppercase text-sm">
+          Journies ending at the station
+        </strong>
+        <div className="pt-2">
           Total journies: {stationWithStats.stats.returnStations.totalJournies}
         </div>
-        <div>
+        <div className="pb-4">
           {`The average distance:
         ${returnAvgDistance} km`}
         </div>
-        <h3>Five most popular stations where journey started:</h3>
+        <u>Five most popular stations where journey started:</u>
         <ul>
           {stationWithStats.stats.returnStations.topPopularStations.map(
             (station: { departureStationName: string }) => (
