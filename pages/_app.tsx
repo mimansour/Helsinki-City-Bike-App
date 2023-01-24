@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Layout>
       <Head>
-        <title>Helsinki City Bike App</title>
+        <title>Helsinki City Bike</title>
         <meta
           name="description"
           content="Helsinki City Bike App to display usage statistics."

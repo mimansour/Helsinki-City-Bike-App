@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="text-sm text-center">
+    <footer className="text-sm text-center py-4">
       <span>Copyright ©2023.</span>
       <p>
         Made by <strong>Mira Mansour</strong>.

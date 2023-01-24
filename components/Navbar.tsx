@@ -1,9 +1,16 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import logo from '../public/bike_logo.svg'
+import logo from '../public/bike-logo.svg'
+import { useRouter } from 'next/router'
 
 export default function Navbar() {
-  const linkStyle = 'px-3 hover:text-amber-500'
+  const router = useRouter()
+
+  const linkStyle = (url: string) => {
+    return `px-3 font-medium hover:text-gray-900 hover:underline underline-offset-8 decoration-amber-500 ${
+      router.asPath === url ? 'text-gray-900 underline' : 'text-gray-500'
+    }`
+  }
 
   return (
     <div className="flex flex-col justify-center md:flex-row md:justify-between items-center md:px-4">
@@ -15,14 +22,14 @@ export default function Navbar() {
         />
       </Link>
       <nav className="flex justify-center py-2">
-        <Link className={linkStyle} href="/">
-          Home
+        <Link className={linkStyle('/')} href="/">
+          HOME
         </Link>
-        <Link href="/stations" className={linkStyle}>
-          Stations
+        <Link href="/stations" className={linkStyle('/stations')}>
+          STATIONS
         </Link>
-        <Link href="/journies" className={linkStyle}>
-          Journies
+        <Link href="/journies" className={linkStyle('/journies')}>
+          JOURNIES
         </Link>
       </nav>
     </div>
