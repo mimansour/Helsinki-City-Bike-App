@@ -92,38 +92,38 @@ export default function Journies({ journies }: { journies: Journey[] }) {
   }
 
   return (
-    <div className="pt-10 pb-72 gap-y-6 mx-10 flex flex-col items-center">
+    <div className="gap-y-6 mx-10 flex flex-col items-center">
       <h2 className="font-bold text-2xl text-center">Journies</h2>
       <div>
-        <label htmlFor="table-search" className="">
-          Search station:
-        </label>
-        <div className="relative mt-1">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <Image src={searchIcon} alt="" />
+        <div className="py-4">
+          <div className="relative mt-1">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <Image src={searchIcon} alt="" />
+            </div>
+            <input
+              type="text"
+              id="table-search"
+              className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-amber-700 focus:border-amber-700 focus:outline-none"
+              placeholder="Search station"
+              value={params.filterBy}
+              onChange={({ target }) => handleFilterChange(target.value)}
+            />
           </div>
-          <input
-            type="text"
-            id="table-search"
-            className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-amber-500 focus:border-amber-500 "
-            placeholder="Search station"
-            value={params.filterBy}
-            onChange={({ target }) => handleFilterChange(target.value)}
-          />
         </div>
-      </div>
-      <JourniesTable<Journey>
-        data={journeyData}
-        columns={columns}
-        onSorting={onSorting}
-      />
-      <div className="flex items-center gap-2">
-        <button
-          className="border rounded-lg bg-amber-600 text-slate-100 py-2 px-3 hover:bg-amber-500"
-          onClick={() => onLoadMoreClick()}
-        >
-          {'Load more results'}
-        </button>
+        <JourniesTable<Journey>
+          data={journeyData}
+          columns={columns}
+          onSorting={onSorting}
+        />
+
+        <div className="w-full flex justify-center py-4">
+          <button
+            className="border rounded-lg bg-amber-600 text-slate-100 py-2 px-3 hover:bg-amber-500"
+            onClick={() => onLoadMoreClick()}
+          >
+            {'Load more results'}
+          </button>
+        </div>
       </div>
     </div>
   )

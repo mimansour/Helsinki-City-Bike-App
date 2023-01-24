@@ -31,7 +31,7 @@ export async function getServerSideProps() {
 
 function Stations({ stations }: { stations: BikeStation[] }) {
   return (
-    <div className="pt-10 pb-72 gap-y-6 mx-10 flex flex-col items-center">
+    <div className="gap-y-6 mx-10 flex flex-col items-center">
       <h2 className="font-bold text-2xl">Stations</h2>
       <StationsTable<BikeStation> data={stations} columns={columns} />
     </div>
