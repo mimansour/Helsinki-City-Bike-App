@@ -7,7 +7,7 @@ export default function Navbar() {
   const router = useRouter()
 
   const linkStyle = (url: string) => {
-    return `px-3 font-medium hover:text-gray-900 hover:underline underline-offset-8 decoration-amber-500 ${
+    return `px-3 font-medium uppercase hover:text-gray-900 hover:underline underline-offset-8 decoration-amber-500 ${
       router.asPath === url ? 'text-gray-900 underline' : 'text-gray-500'
     }`
   }
@@ -19,17 +19,18 @@ export default function Navbar() {
           className="w-60 my-4"
           src={logo}
           alt="Helsinki city bike -logo"
+          data-test-id="logo"
         />
       </Link>
       <nav className="flex justify-center py-2">
         <Link className={linkStyle('/')} href="/">
-          HOME
+          Home
         </Link>
         <Link href="/stations" className={linkStyle('/stations')}>
-          STATIONS
+          Stations
         </Link>
         <Link href="/journies" className={linkStyle('/journies')}>
-          JOURNIES
+          Journies
         </Link>
       </nav>
     </div>

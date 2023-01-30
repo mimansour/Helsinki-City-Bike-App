@@ -3,21 +3,37 @@ describe('Home Page', () => {
     cy.visit('http://localhost:3000')
   })
 
-  it('should render home page', () => {
-    cy.get('h1').contains('Welcome to Helsinki City Bike App!')
+  it('should render home page and footer', () => {
+    cy.get('h1').contains('Helsinki City Bike App')
+    cy.get('footer').contains('Copyright ©2023.')
   })
 
-  it('clicking Stations link renders stations table', () => {
+  it('navbar links work', () => {
     cy.contains('Stations').click()
+    cy.get('h2').contains('Stations')
+    cy.contains('Name')
+    cy.contains('Address')
+
+    cy.contains('Journies').click()
+    cy.get('h2').contains('Journies')
+
+    cy.contains('Home').click()
+    cy.get('h1').contains('Helsinki City Bike App')
+  })
+
+  it('clicking Get started link renders stations table', () => {
+    cy.contains('Get started').click()
+    cy.get('h2').contains('Stations')
     cy.contains('Name')
     cy.contains('Address')
   })
-  it('clicking Journies link renders journies table', () => {
-    cy.contains('Journies').click()
-    cy.contains('Departure station')
-    cy.contains('Return station')
-    cy.contains('Covered distance (km)')
-    cy.contains('Duration (min)')
+
+  it('clicking the logo navigates back to home page', () => {
+    cy.contains('Get started').click()
+    cy.get('h2').contains('Stations')
+
+    cy.get('[data-test-id="logo"]').click()
+    cy.get('h1').contains('Helsinki City Bike App')
   })
 })
 
