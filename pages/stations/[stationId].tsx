@@ -1,3 +1,4 @@
+import JourniesInfoList from 'components/JourniesInfoList'
 import { getJourneyStatsByStation } from 'lib/db/journey'
 import { getStationById } from 'lib/db/station'
 import { BikeStationStats } from 'lib/types/station'
@@ -44,66 +45,50 @@ function StationView({
     return null
   }
 
+  const departureStationsStats = stationWithStats.stats.departureStations
+  const returnStationsStats = stationWithStats.stats.returnStations
   const departureAvgDistance = fromMetersToKm(
-    stationWithStats.stats.departureStations.averageDistance
+    departureStationsStats.averageDistance
   )
-  const returnAvgDistance = fromMetersToKm(
-    stationWithStats.stats.returnStations.averageDistance
+  const returnAvgDistance = fromMetersToKm(returnStationsStats.averageDistance)
+
+  const departureTopPopularList = departureStationsStats.topPopularStations.map(
+    (station) => station.returnStationName
   )
+  const returnTopPopularList = returnStationsStats.topPopularStations.map(
+    (station) => station.departureStationName
+  )
+
+  const stationName = stationWithStats.station.nameFi
 
   return (
-    <div className="flex flex-col gap-2 text-center">
-      <h2 className="font-bold text-xl py-2">
-        {stationWithStats.station.nameFi}
-      </h2>
-      <div className="py-2">
-        Station address: {stationWithStats.station.addressFi}
-      </div>
-      <div className="py-4">
-        <strong className="uppercase text-sm">
-          Journies starting from the station
-        </strong>
-        <div className="pt-2">
-          Total journies:{' '}
-          {stationWithStats.stats.departureStations.totalJournies}
+    <div className="flex justify-center">
+      <div className="flex flex-col gap-2 text-center bg-white shadow-lg p-8 rounded md:w-2/5 md:min-w-[75vh] max-w-6xl">
+        <h2 className="font-extrabold text-3xl uppercase py-2 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-red-400">
+          {stationName}
+        </h2>
+        <div className="py-2 font-light">
+          Station address:{' '}
+          <span className="font-semibold">
+            {stationWithStats.station.addressFi}
+          </span>
         </div>
-        <div className="pb-4">
-          {`The average distance:
-        ${departureAvgDistance} km`}
-        </div>
-        <u>Five most popular stations where journey ended:</u>
-        <ul>
-          {stationWithStats.stats.departureStations.topPopularStations.map(
-            (station: { returnStationName: string }) => (
-              <li key={station.returnStationName}>
-                {station.returnStationName}
-              </li>
-            )
-          )}
-        </ul>
-      </div>
-
-      <div className="py-4">
-        <strong className="uppercase text-sm">
-          Journies ending at the station
-        </strong>
-        <div className="pt-2">
-          Total journies: {stationWithStats.stats.returnStations.totalJournies}
-        </div>
-        <div className="pb-4">
-          {`The average distance:
-        ${returnAvgDistance} km`}
-        </div>
-        <u>Five most popular stations where journey started:</u>
-        <ul>
-          {stationWithStats.stats.returnStations.topPopularStations.map(
-            (station: { departureStationName: string }) => (
-              <li key={station.departureStationName}>
-                {station.departureStationName}
-              </li>
-            )
-          )}
-        </ul>
+        <hr className="w-48 h-1 mx-auto my-4 bg-amber-500 border-0 rounded md:my-10"></hr>
+        <JourniesInfoList
+          averageDistance={departureAvgDistance}
+          topPopularStations={departureTopPopularList}
+          totalJournies={departureStationsStats.totalJournies}
+          isDeparture={true}
+          stationName={stationName}
+        />
+        <hr className="w-48 h-1 mx-auto my-4 bg-amber-500 border-0 rounded md:my-10"></hr>
+        <JourniesInfoList
+          averageDistance={returnAvgDistance}
+          topPopularStations={returnTopPopularList}
+          totalJournies={returnStationsStats.totalJournies}
+          isDeparture={false}
+          stationName={stationName}
+        />
       </div>
     </div>
   )
