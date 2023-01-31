@@ -1,5 +1,5 @@
 import React from 'react'
-import { Column, Table as ReactTable } from '@tanstack/react-table'
+import { Column } from '@tanstack/react-table'
 
 function TableFilter({
   column,

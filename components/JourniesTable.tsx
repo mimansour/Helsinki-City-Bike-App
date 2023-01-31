@@ -25,8 +25,8 @@ export default function JourniesTable<T extends {}>({
 
   return (
     <div>
-      <table className="text-left text-gray-500 shadow-lg">
-        <thead className="text-sm text-gray-700 uppercase bg-gray-100">
+      <table className="text-left text-gray-500 shadow-sm">
+        <thead className="text-gray-700 uppercase bg-neutral-100">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {

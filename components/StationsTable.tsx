@@ -13,7 +13,7 @@ import {
 import TableFilter from './TableFilter'
 import arrowIcon from '../public/arrow.svg'
 import Image from 'next/image'
-import chevronRight from '../public/right-chevron.svg'
+import ChevronRightIcon from './ChevronRightIcon'
 
 export default function StationsTable<T extends {}>({
   data,
@@ -39,8 +39,8 @@ export default function StationsTable<T extends {}>({
 
   return (
     <div>
-      <table className="text-left text-gray-500 min-w-[32rem] table-fixed shadow-lg">
-        <thead className="text-sm text-gray-700 uppercase bg-gray-100">
+      <table className="text-left text-gray-500 min-w-[32rem] table-fixed shadow-sm mb-4">
+        <thead className="text-gray-700 uppercase bg-neutral-100">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -106,19 +106,14 @@ export default function StationsTable<T extends {}>({
           ))}
         </tbody>
       </table>
-      <div className="h-2" />
       <div className="flex flex-row justify-center gap-2">
         <button
-          className="p-2"
+          className="w-6 h-6 text-gray-900 hover:-translate-x-1 transition m-2 rotate-180"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
+          aria-label="previous page"
         >
-          <Image
-            alt=""
-            src={chevronRight}
-            data-test-id="chevronLeft"
-            className="w-6 h-6 hover:-translate-x-1 transition rotate-180"
-          />
+          <ChevronRightIcon />
         </button>
 
         <span className="flex items-center gap-1">
@@ -129,16 +124,12 @@ export default function StationsTable<T extends {}>({
           </strong>
         </span>
         <button
-          className="p-2"
+          className="w-6 h-6 text-gray-900 hover:translate-x-1 transition m-2"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
+          aria-label="next page"
         >
-          <Image
-            alt=""
-            src={chevronRight}
-            data-test-id="chevronRight"
-            className="w-6 h-6 hover:translate-x-1 transition"
-          />
+          <ChevronRightIcon />
         </button>
       </div>
     </div>

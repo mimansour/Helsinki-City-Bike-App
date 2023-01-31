@@ -93,22 +93,20 @@ export default function Journies({ journies }: { journies: Journey[] }) {
 
   return (
     <div className="gap-y-6 mx-10 flex flex-col items-center">
-      <h2 className="font-bold text-2xl text-center">Journies</h2>
+      <h2 className="font-bold text-3xl text-center uppercase">Journies</h2>
       <div>
-        <div className="py-4">
-          <div className="relative mt-1">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Image src={searchIcon} alt="" />
-            </div>
-            <input
-              type="text"
-              id="table-search"
-              className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-amber-700 focus:border-amber-700 focus:outline-none"
-              placeholder="Search station"
-              value={params.filterBy}
-              onChange={({ target }) => handleFilterChange(target.value)}
-            />
+        <div className="relative mt-1 py-4">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <Image src={searchIcon} alt="" />
           </div>
+          <input
+            type="text"
+            id="table-search"
+            className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-white focus:ring-amber-700 focus:border-amber-700 focus:outline-none"
+            placeholder="Search station"
+            value={params.filterBy}
+            onChange={({ target }) => handleFilterChange(target.value)}
+          />
         </div>
         <JourniesTable<Journey>
           data={journeyData}
@@ -116,9 +114,9 @@ export default function Journies({ journies }: { journies: Journey[] }) {
           onSorting={onSorting}
         />
 
-        <div className="w-full flex justify-center py-4">
+        <div className="w-full flex justify-center py-10">
           <button
-            className="border rounded-lg bg-amber-600 text-slate-100 py-2 px-3 hover:bg-amber-500"
+            className="border rounded-lg bg-gradient-to-r from-amber-500 to-red-400 text-neutral-50 py-3 px-4 hover:scale-105 transition-all ease-in-out duration-400 uppercase font-medium"
             onClick={() => onLoadMoreClick()}
           >
             {'Load more results'}
