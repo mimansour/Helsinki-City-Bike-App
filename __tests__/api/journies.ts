@@ -1,5 +1,5 @@
 import { createMocks } from 'node-mocks-http'
-import { testJournies, testJourniesJsonData } from 'fixtures/journies'
+import { testJourniesJsonData } from 'fixtures/journies'
 import * as Journey from 'lib/db/journey'
 import journiesHandler from 'pages/api/journies'
 
@@ -16,7 +16,9 @@ describe('journies api', () => {
       method: 'GET',
     })
 
-    getAllJourniesSpy.mockImplementation(() => Promise.resolve(testJournies))
+    getAllJourniesSpy.mockImplementation(() =>
+      Promise.resolve(testJourniesJsonData)
+    )
     await journiesHandler(req, res)
 
     expect(res._getStatusCode()).toBe(200)

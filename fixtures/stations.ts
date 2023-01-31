@@ -1,6 +1,6 @@
 export const testStationA = {
   fid: 1,
-  id: '63bc1ee559e341b56cc01875',
+  id: 1,
   stationId: '505',
   nameFi: 'TestName',
   nameSv: 'Test',
@@ -17,7 +17,7 @@ export const testStationA = {
 
 const testStationB = {
   fid: 2,
-  id: '63bc1ee559e341b56cc01875',
+  id: 2,
   stationId: '501',
   nameFi: 'Test2Name',
   nameSv: 'Test2',

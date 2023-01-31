@@ -8,17 +8,13 @@ describe('Home page', () => {
   })
 
   it('renders title', () => {
-    const title = screen.getByText('Welcome to Helsinki City Bike App!')
+    const title = screen.getByText('Helsinki City Bike App')
     expect(title).toBeDefined()
   })
 
   it('renders links', async () => {
-    const stationsLink = screen.getByRole('link', { name: 'Stations' })
+    const stationsLink = screen.getByRole('link', { name: 'Get started' })
     expect(stationsLink).toBeInTheDocument()
     expect(stationsLink).toHaveAttribute('href', '/stations')
-
-    const journeysLink = screen.getByRole('link', { name: 'Journies' })
-    expect(journeysLink).toBeInTheDocument()
-    expect(journeysLink).toHaveAttribute('href', '/journies')
   })
 })
