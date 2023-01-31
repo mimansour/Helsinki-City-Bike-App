@@ -21,5 +21,10 @@
     "types": ["jest", "node", "@types/testing-library__jest-dom"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "./cypress", "./cypress.config.ts"]
+  "exclude": ["node_modules", "./cypress", "./cypress.config.ts"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }
