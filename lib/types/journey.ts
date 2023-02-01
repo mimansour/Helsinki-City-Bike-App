@@ -1,5 +1,3 @@
-import { Journey } from '@prisma/client'
-
 export type BikeJourney = {
   departureDate: string
   returnDate: string
@@ -12,7 +10,7 @@ export type BikeJourney = {
 }
 
 export type BikeJourneyParams = {
-  skip: number
+  skip?: number
   sortByHeader?: string
   filterBy?: string
 }
