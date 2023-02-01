@@ -9,10 +9,10 @@
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:e2e": "cypress run",
+    "cypress": "cypress open",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "cypress": "cypress open",
-    "test:e2e": "cypress run",
     "setup:db": "prisma generate && prisma migrate deploy && prisma db seed"
   },
   "dependencies": {

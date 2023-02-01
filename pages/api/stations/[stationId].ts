@@ -18,11 +18,13 @@ export default async function handler(
     const station = await getStationById(stationId)
 
     if (station) {
-      const stats = await getJourneyStatsByStation(stationId)
+      const { returnStationsStats, departureStationsStats } =
+        await getJourneyStatsByStation(stationId)
 
       return res.status(200).json({
         station,
-        stats,
+        departureStationsStats,
+        returnStationsStats,
       })
     } else {
       return res
