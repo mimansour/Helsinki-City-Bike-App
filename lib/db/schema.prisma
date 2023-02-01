@@ -8,9 +8,8 @@ datasource db {
 }
 
 model Station {
-  fid Int
-  id  Int @id @default(autoincrement())
-
+  fid       Int
+  id        Int    @id @default(autoincrement())
   stationId String @unique
   nameFi    String
   nameSv    String

@@ -10,10 +10,6 @@ export default async function handler(
   if (req.method === 'GET') {
     const stations = await getAllStations()
 
-    if (!stations) {
-      return res.status(400).json({ message: 'Bad request.' })
-    }
-
     return res.status(200).json(stations)
   }
 }
