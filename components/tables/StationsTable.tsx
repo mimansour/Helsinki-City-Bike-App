@@ -11,20 +11,20 @@ import {
   getPaginationRowModel,
 } from '@tanstack/react-table'
 import TableFilter from './TableFilter'
-import arrowIcon from '../public/arrow.svg'
-import Image from 'next/image'
-import ChevronRightIcon from './ChevronRightIcon'
+import { Station } from '@prisma/client'
+import Pagination from './Pagination'
+import ArrowIconButton from 'components/general/ArrowIconButton'
 
-export default function StationsTable<T extends {}>({
+export default function StationsTable({
   data,
   columns,
 }: {
-  data: T[]
-  columns: ColumnDef<T, any>[]
+  data: Station[]
+  columns: ColumnDef<Station, string>[]
 }) {
   const [sorting, setSorting] = React.useState<SortingState>([])
 
-  const table = useReactTable<T>({
+  const table = useReactTable<Station>({
     data,
     columns,
     state: {
@@ -57,25 +57,11 @@ export default function StationsTable<T extends {}>({
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-                          {
-                            <a
-                              href="#"
-                              data-test-id={header.id}
-                              {...{
-                                className: header.column.getCanSort()
-                                  ? 'cursor-pointer select-none'
-                                  : '',
-                                onClick:
-                                  header.column.getToggleSortingHandler(),
-                              }}
-                            >
-                              <Image
-                                alt=""
-                                src={arrowIcon}
-                                className="w-3 h-3 mt-1"
-                              />
-                            </a>
-                          }
+                          <ArrowIconButton
+                            ariaLabel={header.id}
+                            onClick={header.column.getToggleSortingHandler()}
+                            canSort={header.column.getCanSort()}
+                          />
                         </div>
 
                         {header.column.getCanFilter() ? (
@@ -106,16 +92,12 @@ export default function StationsTable<T extends {}>({
           ))}
         </tbody>
       </table>
-      <div className="flex flex-row justify-center gap-2">
-        <button
-          className="w-6 h-6 text-gray-900 hover:-translate-x-1 transition m-2 rotate-180"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-          aria-label="previous page"
-        >
-          <ChevronRightIcon />
-        </button>
-
+      <Pagination
+        onPreviousPageClick={() => table.previousPage()}
+        canPreviousPage={!table.getCanPreviousPage()}
+        onNextPageClick={() => table.nextPage()}
+        canNextPage={!table.getCanNextPage()}
+      >
         <span className="flex items-center gap-1">
           <div>Page</div>
           <strong>
@@ -123,15 +105,7 @@ export default function StationsTable<T extends {}>({
             {table.getPageCount()}
           </strong>
         </span>
-        <button
-          className="w-6 h-6 text-gray-900 hover:translate-x-1 transition m-2"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-          aria-label="next page"
-        >
-          <ChevronRightIcon />
-        </button>
-      </div>
+      </Pagination>
     </div>
   )
 }

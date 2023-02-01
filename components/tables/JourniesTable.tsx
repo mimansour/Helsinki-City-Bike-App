@@ -5,19 +5,19 @@ import {
   useReactTable,
   ColumnDef,
 } from '@tanstack/react-table'
-import arrowIcon from '../public/arrow.svg'
-import Image from 'next/image'
+import { Journey } from '@prisma/client'
+import ArrowIconButton from 'components/general/ArrowIconButton'
 
-export default function JourniesTable<T extends {}>({
+export default function JourniesTable({
   data,
   columns,
   onSorting,
 }: {
-  data: T[]
-  columns: ColumnDef<T, any>[]
+  data: Journey[]
+  columns: ColumnDef<Journey, any>[]
   onSorting: (headerId: string) => void
 }) {
-  const table = useReactTable<T>({
+  const table = useReactTable<Journey>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -41,17 +41,10 @@ export default function JourniesTable<T extends {}>({
                         header.column.columnDef.header,
                         header.getContext()
                       )}
-
-                      <button
-                        data-test-id={header.id}
+                      <ArrowIconButton
+                        ariaLabel={header.id}
                         onClick={() => onSorting(header.id)}
-                      >
-                        <Image
-                          alt=""
-                          src={arrowIcon}
-                          className="w-3 h-3 ml-2"
-                        />
-                      </button>
+                      />
                     </div>
                   </th>
                 )
