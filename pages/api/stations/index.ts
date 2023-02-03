@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getAllStations } from 'lib/db/station'
-
-type Data = {}
+import { Station } from '@prisma/client'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Station[]>
 ) {
   if (req.method === 'GET') {
     const stations = await getAllStations()

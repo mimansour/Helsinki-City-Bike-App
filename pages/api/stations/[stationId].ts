@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getStationById } from 'lib/db/station'
 import { getJourneyStatsByStation } from 'lib/db/journey'
-
-type Data = {}
+import { BikeStationStats } from 'lib/types/station'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<{ message: string } | BikeStationStats>
 ) {
   if (req.method === 'GET') {
     const stationId = req.query.stationId
