@@ -61,7 +61,7 @@ export default function Journeys({ journeys }: { journeys: Journey[] }) {
   return (
     <div className="gap-y-6 flex flex-col items-center">
       <h1 className="font-bold text-3xl text-center uppercase">Journeys</h1>
-      <div>
+      <div className="m-4">
         <SearchInput value={params.filterBy} onFilterChange={onFilterChange} />
         <JourneysTableContainer data={journeyData} onSorting={onSorting} />
         <div className="w-full flex justify-center py-10">

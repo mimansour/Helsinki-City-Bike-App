@@ -34,13 +34,15 @@ export default function JourneysTable({
                   <th
                     key={header.id}
                     colSpan={header.colSpan}
-                    className="px-6 py-3"
+                    className="md:px-6 py-4 px-2"
                   >
-                    <div className="flex md:gap-x-4">
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                    <div className="flex w-32 md:w-auto gap-x-2 md:gap-x-4">
+                      <span className="w-min md:w-auto">
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </span>
                       <ArrowIconButton
                         ariaLabel={header.id}
                         onClick={() => onSorting(header.id)}
@@ -56,7 +58,7 @@ export default function JourneysTable({
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="bg-white border-b md:text-base text-xs">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="px-6 py-4">
+                <td key={cell.id} className="md:px-6 px-2 py-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
