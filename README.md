@@ -18,15 +18,15 @@ Check out the deployed demo of the application here: https://helsinki-city-bike-
 - Linting with [ESLint](https://eslint.org/)
 - Code formatting with [Prettier](https://prettier.io/)
 - CI/CD pipeline using [GitHub Actions](https://github.com/features/actions)
-- SQL database with [SQLite](https://sqlite.org/index.html)
+- SQL database with [PostgreSQL](https://www.postgresql.org/). Managed database with [Supabase](https://supabase.com)
 - Database ORM with [Prisma](https://www.prisma.io/)
-- App deployment with [Fly.io](https://fly.io/) and [Docker](https://www.docker.com/)
+- App deployment with [Fly.io](https://fly.io/), [Docker](https://www.docker.com/)
 
 This technology stack was chosen because it is modern and commonly used in web development projects.
 
 NextJS has many great features like built-in routing, pre-rendering and built-in images and links optimization. Typescripts provides type-safety. Tailwind makes styling easy and flexible with direct HTML markup.
 
-SQLite is used because of its simplicity with the ability to have an entire database stored in a single file. Since the database is used as read-only, SQLite was a good fit. Prisma ORM makes working with databases easy with data models, automated migrations and native Typescript support.
+PostgreSQL is used as it is stable and a widely used database. Prisma ORM makes working with databases easy with data models, automated migrations and native Typescript support.
 
 ## Implemented features
 
@@ -72,19 +72,33 @@ To install all dependencies, run:
 npm install
 ```
 
-To check if the database is empty and to seed the database if needed, run:
+## Database setup
+
+Currently PostgreSQL is used as the main database in the application. The application uses a hosted database in the cloud. You need to set the .env `DATABASE_URL` to match the url given to you separately.
+
+### Cloud Database setup
+
+1. Create an empty .env file.
+2. Copy the content of .env.example into the .env
+3. Replace ´DATABASE_URL´ content with the url given to you separately.
+
+### Local Database setup
+
+If needed, you can set up a local database as follows:
+
+First you need to run a PostgreSQL instance locally using Docker:
+
+```bash
+docker-compose up
+```
+
+Once the container is running, you can run the database's seeding script:
 
 ```bash
 npm run setup:db
 ```
 
-If the database is empty, the seeding script will parse all csv data (stored in `data` directory) to json and store it to database. Depending on your hardware, the seeding script might take few minutes to complete due to a large amount of data (3+ million new rows).
-
-## Database setup
-
-Currently SQLite is used as the main database in the application. The database is stored in version-control with all the necessary data already.
-
-The SQLite database file is located at `lib/db/sqlite.db`. If needed, you can create a new database by removing the existing SQLite database file and running the database seeding script as instructed above.
+If the database is empty, the seeding script will parse all csv data (stored in `data` directory) to json and store it to database. Depending on your hardware, the seeding script might take several minutes to complete due to a large amount of data (3+ million new rows).
 
 ## CI/CD pipelines
 
@@ -152,7 +166,7 @@ Prettier auto-formatting is also used in the application. You can run `npm run f
 
 ## TODO
 
-The application could be developed furter by linking SQL tables together. Currently SQL tables are not linked. Also the database url could be changed to a dynamic url based on env. Currently the database url is hardcoded.
+The application could be developed furter by linking SQL tables together. Currently SQL tables are not linked. Also due to free-tier cloud resources, fetching single station stats is slow which can be improved.
 
 The journeys table currently supports ordering per column only in ascending order. The table could be developed further by adding also option for descending order sorting. However the stations table supports ordering in both ascending and descending order.
 
