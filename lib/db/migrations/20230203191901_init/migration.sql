@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Station" (
     "fid" INTEGER NOT NULL,
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "stationId" TEXT NOT NULL,
     "nameFi" TEXT NOT NULL,
     "nameSv" TEXT NOT NULL,
@@ -12,21 +12,25 @@ CREATE TABLE "Station" (
     "citySv" TEXT NOT NULL,
     "operator" TEXT NOT NULL,
     "capacity" INTEGER NOT NULL,
-    "x" REAL NOT NULL,
-    "y" REAL NOT NULL
+    "x" DOUBLE PRECISION NOT NULL,
+    "y" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "Station_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Journey" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "departureDate" DATETIME NOT NULL,
-    "returnDate" DATETIME NOT NULL,
+    "id" SERIAL NOT NULL,
+    "departureDate" TIMESTAMP(3) NOT NULL,
+    "returnDate" TIMESTAMP(3) NOT NULL,
     "departureStationId" TEXT NOT NULL,
     "departureStationName" TEXT NOT NULL,
     "returnStationId" TEXT NOT NULL,
     "returnStationName" TEXT NOT NULL,
     "duration" INTEGER NOT NULL,
-    "distance" REAL NOT NULL
+    "distance" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "Journey_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
