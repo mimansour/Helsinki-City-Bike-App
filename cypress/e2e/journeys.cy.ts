@@ -47,7 +47,7 @@ describe('Journeys page', () => {
       ['Linnanmäki', 'Sörnäinen (M)', '2.37', '13.18'],
     ]
 
-    cy.get('[id="table-search"]').type('Linna')
+    cy.get('[aria-label="search station"]').type('Linna')
     searchedPage.map((arr) => arr.map((item) => cy.contains(item)))
   })
 })

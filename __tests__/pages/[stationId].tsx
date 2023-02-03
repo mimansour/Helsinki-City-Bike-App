@@ -34,7 +34,7 @@ describe('Single station page', () => {
     render(<StationView stationWithStats={stationWithStats} />)
   })
 
-  it('renders stats data', () => {
+  it('renders station info', () => {
     const title = screen.getByText(`${stationWithStats.station.nameFi}`)
     expect(title).toBeInTheDocument()
 
@@ -42,7 +42,9 @@ describe('Single station page', () => {
     expect(
       screen.getByText(`${stationWithStats.station.addressFi}`)
     ).toBeInTheDocument()
+  })
 
+  it('renders stats data', () => {
     const totalDepartJourneys = screen.getByText(
       `${stationWithStats.departureStationsStats.totalJourneys}`
     )

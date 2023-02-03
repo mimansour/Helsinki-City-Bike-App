@@ -5,7 +5,7 @@ import { fromMetersToKm, fromSecToMin } from 'lib/utils/journey'
 
 const JourneysTableContainer = (props: {
   data: Journey[]
-  onSorting: (headerId?: any) => Promise<void>
+  onSorting: (headerId?: string) => Promise<void>
 }) => {
   const columnHelper = createColumnHelper<Journey>()
 
