@@ -1,9 +1,9 @@
-import JourniesTable from './JourniesTable'
+import JourneysTable from './JourneysTable'
 import { createColumnHelper } from 'components/tables/StationsTable'
 import { Journey } from '@prisma/client'
-import { fromMetersToKm, fromSecToMin } from '@/lib/utils/journey'
+import { fromMetersToKm, fromSecToMin } from 'lib/utils/journey'
 
-const JourniesTableContainer = (props: {
+const JourneysTableContainer = (props: {
   data: Journey[]
   onSorting: (headerId?: any) => Promise<void>
 }) => {
@@ -38,7 +38,7 @@ const JourniesTableContainer = (props: {
     }),
   ]
   return (
-    <JourniesTable
+    <JourneysTable
       data={props.data}
       columns={columns}
       onSorting={props.onSorting}
@@ -46,4 +46,4 @@ const JourniesTableContainer = (props: {
   )
 }
 
-export default JourniesTableContainer
+export default JourneysTableContainer

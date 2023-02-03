@@ -7,7 +7,7 @@ const Home = () => (
     </h1>
     <p className="w-3/5 pt-10 text-xl text-gray-600">
       Helsinki City Bike App displays statistics about the bicycle stations and
-      journies in the Helsinki metropolitan area.
+      journeys in the Helsinki metropolitan area.
     </p>
     <PrimaryLinkButton title="Get started" href="/stations" />
   </div>

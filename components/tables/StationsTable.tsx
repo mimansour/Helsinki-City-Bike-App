@@ -39,8 +39,8 @@ export default function StationsTable({
 
   return (
     <div>
-      <table className="text-left text-gray-500 min-w-[32rem] table-fixed shadow-sm mb-4">
-        <thead className="text-gray-700 uppercase bg-neutral-100">
+      <table className="text-left text-gray-500 md:min-w-[32rem] table-fixed shadow-sm mb-4">
+        <thead className="text-gray-700 uppercase bg-neutral-100 md:text-base text-xs">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -52,7 +52,7 @@ export default function StationsTable({
                   >
                     {header.isPlaceholder ? null : (
                       <div>
-                        <div className="flex flex-row justify-between">
+                        <div className="flex flex-row md:justify-between gap-x-2">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
@@ -82,7 +82,7 @@ export default function StationsTable({
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="bg-white border-b">
+            <tr key={row.id} className="bg-white border-b md:text-base text-xs">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="px-6 py-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -5,9 +5,11 @@ describe('Single Station Page', () => {
 
   it('statistics rendered', () => {
     const startList = [
-      'Total journies: 6316',
-      'The average distance: 2.88 km',
-      'Five most popular stations where journey ended:',
+      'Journeys count:',
+      '6316',
+      'Average distance:',
+      '2.88 km',
+      'Top arrival stations',
       'Mellstenintie',
       'Tuulimäki',
       'Westendintie',
@@ -16,17 +18,19 @@ describe('Single Station Page', () => {
     ]
 
     const endList = [
-      'Total journies: 6292',
-      'The average distance: 2.93 km',
-      'Five most popular stations where journey ended:',
+      'Journeys count:',
+      '6292',
+      'Average distance:',
+      '2.93 km',
+      'Top departure stations',
       'Mellstenintie',
       'Tuulimäki',
       'Westendintie',
       'Suomenlahdentie',
       'Linnakepolku',
     ]
-    cy.get('h2').contains('Westendinasema')
-    cy.contains('Station address: Westendintie 1')
+    cy.get('h1').contains('Westendinasema')
+    cy.contains('Westendintie 1')
     startList.map((item) => cy.contains(item))
     endList.map((item) => cy.contains(item))
   })

@@ -1,16 +1,16 @@
 import { PrismaClient } from '@prisma/client'
 import { BikeJourney } from '../types/journey'
-import { parseJournies, parseStations } from '../utils/csv'
-import { insertManyJournies } from './journey'
+import { parseJourneys, parseStations } from '../utils/csv'
+import { insertManyJourneys } from './journey'
 
 const prisma = new PrismaClient()
 
 const addBikeJourneyDataToDb = async () => {
-  const journies = parseJournies()
-  console.log('Journies parsed successfully!')
+  const journeys = parseJourneys()
+  console.log('Journeys parsed successfully!')
 
   const CHUNK_SIZE = 20000
-  const journiesChunks = journies.reduce((chunks, journey, index) => {
+  const journeysChunks = journeys.reduce((chunks, journey, index) => {
     const chunkIndex = Math.floor(index / CHUNK_SIZE)
 
     const isNewChunk = !chunks[chunkIndex]
@@ -25,22 +25,22 @@ const addBikeJourneyDataToDb = async () => {
   }, [] as BikeJourney[][])
 
   console.log(
-    `Adding ${journies.length} journies in ${journiesChunks.length} chunks.`
+    `Adding ${journeys.length} journeys in ${journeysChunks.length} chunks.`
   )
 
-  for await (const [index, chunk] of journiesChunks.entries()) {
+  for await (const [index, chunk] of journeysChunks.entries()) {
     try {
-      await insertManyJournies(chunk)
-      console.log(`Chunk ${index + 1} / ${journiesChunks.length} is added`)
+      await insertManyJourneys(chunk)
+      console.log(`Chunk ${index + 1} / ${journeysChunks.length} is added`)
     } catch (error) {
       console.log(
-        `Saving chunk ${index + 1} / ${journiesChunks.length} failed!`
+        `Saving chunk ${index + 1} / ${journeysChunks.length} failed!`
       )
       console.error(error)
     }
   }
 
-  console.log('Journies saved to DB successfully!')
+  console.log('Journeys saved to DB successfully!')
 }
 
 const addBikeStationDataToDb = async () => {

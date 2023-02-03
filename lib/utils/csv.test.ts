@@ -1,4 +1,4 @@
-import { parseFileJournies, parseJournies, parseStations } from './csv'
+import { parseFileJourneys, parseJourneys, parseStations } from './csv'
 import fs from 'fs'
 import path from 'path'
 
@@ -8,7 +8,7 @@ const stationCsvFileHeader =
 const journeyCsvFileHeader =
   'Departure,Return,Departure station id,Departure station name,Return station id,Return station name,Covered distance (m),Duration (sec.)'
 
-const dirPath = path.join(process.cwd(), 'data/journies')
+const dirPath = path.join(process.cwd(), 'data/journeys')
 
 describe('csv utils', () => {
   const readFileSyncSpy = jest.spyOn(fs, 'readFileSync')
@@ -70,7 +70,7 @@ describe('csv utils', () => {
 `
       )
 
-      expect(parseFileJournies('test')).toHaveLength(2)
+      expect(parseFileJourneys('test')).toHaveLength(2)
     })
 
     it('filters rows without required fields', () => {
@@ -87,7 +87,7 @@ describe('csv utils', () => {
 `
       )
 
-      expect(parseFileJournies('test')).toHaveLength(0)
+      expect(parseFileJourneys('test')).toHaveLength(0)
     })
 
     it('filters rows without valid dates', () => {
@@ -97,7 +97,7 @@ describe('csv utils', () => {
 `
       )
 
-      expect(parseFileJournies('test')).toHaveLength(0)
+      expect(parseFileJourneys('test')).toHaveLength(0)
     })
 
     it('filters rows without long enough duration', () => {
@@ -108,7 +108,7 @@ describe('csv utils', () => {
 `
       )
 
-      expect(parseFileJournies('test')).toHaveLength(1)
+      expect(parseFileJourneys('test')).toHaveLength(1)
     })
 
     it('filters rows without long enough distance', () => {
@@ -119,7 +119,7 @@ describe('csv utils', () => {
 `
       )
 
-      expect(parseFileJournies('test')).toHaveLength(1)
+      expect(parseFileJourneys('test')).toHaveLength(1)
     })
 
     it('calls correct files with correct path', () => {
@@ -129,7 +129,7 @@ describe('csv utils', () => {
 2021-06-20T21:58:28,2021-06-20T21:58:28,Test1,Test2,Test3,Test4,11,10
 `
       )
-      parseJournies()
+      parseJourneys()
 
       const files = [
         '2021-05.csv',

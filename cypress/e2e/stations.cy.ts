@@ -34,11 +34,11 @@ describe('Stations page', () => {
   })
 
   it('pagination works', () => {
-    cy.get('[data-test-id="chevronRight"]').click()
+    cy.get(`[aria-label="next page"]`).click()
     cy.contains('2 of 46')
     namesPage2.map((name) => cy.contains(name))
 
-    cy.get('[data-test-id="chevronLeft"]').click()
+    cy.get(`[aria-label="previous page"]`).click()
     cy.contains('1 of 46')
     namesPage1.map((name) => cy.contains(name))
   })
@@ -71,9 +71,9 @@ describe('Stations page', () => {
     ]
 
     namesPage1.map((name) => cy.contains(name))
-    cy.get('[data-test-id="nameFi"]').click()
+    cy.get('[aria-label="order by column nameFi"]').click()
     orderedDescNames.map((name) => cy.contains(name))
-    cy.get('[data-test-id="nameFi"]').click()
+    cy.get('[aria-label="order by column nameFi"]').click()
     orderedAscNames.map((name) => cy.contains(name))
   })
 
@@ -87,8 +87,8 @@ describe('Stations page', () => {
 
   it('clicking station name navigates to single station view page', () => {
     cy.contains('Golfpolku').click()
-    cy.get('h2').contains('Golfpolku')
-    cy.get('h3').contains('Journies starting from the station')
+    cy.get('h1').contains('Golfpolku')
+    cy.get('h2').contains('Journeys starting from Golfpolku')
   })
 })
 

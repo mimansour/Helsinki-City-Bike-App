@@ -1,7 +1,7 @@
 import { createMocks } from 'node-mocks-http'
 import stationIdHandler from 'pages/api/stations/[stationId]'
 import { testStationA, testStations } from 'fixtures/stations'
-import { testStats } from 'fixtures/journies'
+import { testStats } from 'fixtures/journeys'
 import * as Station from 'lib/db/station'
 import * as Journey from 'lib/db/journey'
 import stationsHandler from 'pages/api/stations'
@@ -36,10 +36,13 @@ describe('station apis', () => {
 
       await stationIdHandler(req, res)
 
+      const { returnStationsStats, departureStationsStats } = testStats
+
       expect(res._getStatusCode()).toBe(200)
       expect(JSON.parse(res._getData())).toEqual({
         station: testStationA,
-        stats: testStats,
+        returnStationsStats,
+        departureStationsStats,
       })
       expect(getStationByIdSpy).toHaveBeenCalledWith(stationId)
       expect(getJourneyStatsSpy).toHaveBeenCalledWith(stationId)

@@ -1,20 +1,20 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import Journies from 'pages/journies'
-import { testJournies, testJourniesJsonData } from 'fixtures/journies'
+import { testJourneys, testJourneysJsonData } from 'fixtures/journeys'
 import { fromMetersToKm, fromSecToMin } from 'lib/utils/journey'
+import Journeys from 'pages/journeys'
 
-describe('Journies page', () => {
+describe('Journeys page', () => {
   beforeEach(() => {
-    render(<Journies journies={testJournies} />)
+    render(<Journeys journeys={testJourneys} />)
   })
 
   it('renders title', () => {
-    const title = screen.getByText('Journies')
+    const title = screen.getByText('Journeys')
     expect(title).toBeDefined()
   })
 
-  it('renders journies table headers', () => {
+  it('renders journeys table headers', () => {
     const table = screen.getByRole('table')
     expect(table).toBeInTheDocument()
 
@@ -39,8 +39,8 @@ describe('Journies page', () => {
     expect(durationCol).toBeInTheDocument()
   })
 
-  it('renders journies table cells', () => {
-    testJourniesJsonData.forEach((journey) => {
+  it('renders journeys table cells', () => {
+    testJourneysJsonData.forEach((journey) => {
       const departureStationNameCell = screen.getByRole('cell', {
         name: journey.departureStationName,
       })

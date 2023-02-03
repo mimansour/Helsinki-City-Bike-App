@@ -1,6 +1,6 @@
-describe('Journies page', () => {
+describe('Journeys page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/journies')
+    cy.visit('http://localhost:3000/journeys')
   })
 
   const page1Data = [
@@ -32,10 +32,10 @@ describe('Journies page', () => {
       ['A.I. Virtasen aukio', 'Rautatientori / itä', '4.55', '27.17'],
     ]
 
-    cy.get('[data-test-id="departureStationName"]').click()
+    cy.get('[aria-label="order by column departureStationName"]').click()
     orderedPage.map((arr) => arr.map((item) => cy.contains(item)))
 
-    cy.get('[data-test-id="departureStationName"]').click()
+    cy.get('[aria-label="order by column departureStationName"]').click()
     page1Data.map((arr) => arr.map((item) => cy.contains(item)))
   })
 

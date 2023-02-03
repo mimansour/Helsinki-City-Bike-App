@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { testStationA } from 'fixtures/stations'
 import '@testing-library/jest-dom/extend-expect'
 import StationView from 'pages/stations/[stationId]'
-import { testStats } from 'fixtures/journies'
+import { testStats } from 'fixtures/journeys'
 import { fromMetersToKm } from 'lib/utils/journey'
 
 jest.mock('next/router', () => ({
@@ -19,9 +19,11 @@ jest.mock('next/router', () => ({
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
 
 describe('Single station page', () => {
+  const { departureStationsStats, returnStationsStats } = testStats
   const stationWithStats = {
     station: testStationA,
-    stats: testStats,
+    departureStationsStats,
+    returnStationsStats,
   }
   beforeEach(() => {
     useRouter.mockImplementationOnce(() => ({
@@ -34,43 +36,43 @@ describe('Single station page', () => {
 
   it('renders stats data', () => {
     const title = screen.getByText(`${stationWithStats.station.nameFi}`)
-    expect(title).toBeDefined()
+    expect(title).toBeInTheDocument()
 
-    const address = screen.getByText(
-      `Station address: ${stationWithStats.station.addressFi}`
-    )
-    expect(address).toBeDefined()
+    expect(screen.getByText('Station address:')).toBeInTheDocument()
+    expect(
+      screen.getByText(`${stationWithStats.station.addressFi}`)
+    ).toBeInTheDocument()
 
-    const totalDepartureJournies = screen.getByText(
-      `Total journies: ${stationWithStats.stats.departureStations.totalJournies}`
+    const totalDepartJourneys = screen.getByText(
+      `${stationWithStats.departureStationsStats.totalJourneys}`
     )
-    expect(totalDepartureJournies).toBeDefined()
+    expect(totalDepartJourneys).toBeInTheDocument()
 
     const avgDistanceDeparture = screen.getByText(
-      `The average distance: ${fromMetersToKm(
-        stationWithStats.stats.departureStations.averageDistance
+      `${fromMetersToKm(
+        stationWithStats.departureStationsStats.averageDistance
       )} km`
     )
-    expect(avgDistanceDeparture).toBeDefined()
+    expect(avgDistanceDeparture).toBeInTheDocument()
 
-    const totalReturnJournies = screen.getByText(
-      `Total journies: ${stationWithStats.stats.returnStations.totalJournies}`
+    const totalReturnJourneys = screen.getByText(
+      `${stationWithStats.returnStationsStats.totalJourneys}`
     )
-    expect(totalReturnJournies).toBeDefined()
+    expect(totalReturnJourneys).toBeInTheDocument()
 
     const avgDistanceReturn = screen.getByText(
-      `The average distance: ${fromMetersToKm(
-        stationWithStats.stats.returnStations.averageDistance
+      `${fromMetersToKm(
+        stationWithStats.returnStationsStats.averageDistance
       )} km`
     )
-    expect(avgDistanceReturn).toBeDefined()
+    expect(avgDistanceReturn).toBeInTheDocument()
 
-    testStats.departureStations.topPopularStations.forEach((station) => {
-      expect(screen.getByText(station.returnStationName)).toBeInTheDocument()
+    testStats.departureStationsStats.topStationsNames.forEach((station) => {
+      expect(screen.getByText(station)).toBeInTheDocument()
     })
 
-    testStats.returnStations.topPopularStations.forEach((station) => {
-      expect(screen.getByText(station.departureStationName)).toBeInTheDocument()
+    testStats.returnStationsStats.topStationsNames.forEach((station) => {
+      expect(screen.getByText(station)).toBeInTheDocument()
     })
   })
 })

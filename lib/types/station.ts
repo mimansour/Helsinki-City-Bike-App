@@ -18,12 +18,12 @@ export type BikeStationStats = {
   station: BikeStation
   departureStationsStats: {
     averageDistance: number
-    totalJournies: number
+    totalJourneys: number
     topStationsNames: string[]
   }
   returnStationsStats: {
     averageDistance: number
-    totalJournies: number
+    totalJourneys: number
     topStationsNames: string[]
   }
 }

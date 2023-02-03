@@ -7,11 +7,11 @@ const ArrowIconButton = (props: {
   onClick: ((event: unknown) => void) | undefined
 }) => (
   <button
-    aria-label={props.ariaLabel}
+    aria-label={`order by column ${props.ariaLabel}`}
     className={props.canSort ? 'cursor-pointer select-none' : ''}
     onClick={props.onClick}
   >
-    <Image alt="" src={arrowIcon} className="w-3 h-3 mt-1" />
+    <Image alt="" src={arrowIcon} className="w-3 h-3 min-w-3 min-h-3" />
   </button>
 )
 
