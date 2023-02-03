@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client'
 import { BikeJourney, BikeJourneyParams } from '../types/journey'
 import prisma from './prisma'
 
@@ -23,11 +22,13 @@ export const getAllJourneys = async (
           {
             departureStationName: {
               contains: filterBy,
+              mode: 'insensitive',
             },
           },
           {
             returnStationName: {
               contains: filterBy,
+              mode: 'insensitive',
             },
           },
         ],
@@ -43,14 +44,19 @@ export const getAllJourneys = async (
 }
 
 export const getJourneyStatsByStation = async (stationId: string) => {
-  const departureStationsStats = await getStatsByStationType(
+  const departureStationsStatsPromise = getStatsByStationType(
     stationId,
     'returnStationId'
   )
-  const returnStationsStats = await getStatsByStationType(
+  const returnStationsStatsPromise = getStatsByStationType(
     stationId,
     'departureStationId'
   )
+
+  const [departureStationsStats, returnStationsStats] = await Promise.all([
+    departureStationsStatsPromise,
+    returnStationsStatsPromise,
+  ])
 
   return { departureStationsStats, returnStationsStats }
 }
@@ -59,7 +65,7 @@ export const getStatsByStationType = async (
   stationId: string,
   type: keyof Pick<BikeJourney, 'departureStationId' | 'returnStationId'>
 ) => {
-  const aggregate = await prisma.journey.aggregate({
+  const aggregatePromise = prisma.journey.aggregate({
     where: {
       [type]: stationId,
     },
@@ -77,7 +83,7 @@ export const getStatsByStationType = async (
     : 'departureStationName'
 
   const TOP_STATIONS_AMOUNT = 5
-  const topPopularStations = await prisma.journey.groupBy({
+  const topPopularStationsPromise = prisma.journey.groupBy({
     by: [groupByCol],
     where: {
       [type]: stationId,
@@ -104,6 +110,11 @@ export const getStatsByStationType = async (
 
     take: TOP_STATIONS_AMOUNT,
   })
+
+  const [aggregate, topPopularStations] = await Promise.all([
+    aggregatePromise,
+    topPopularStationsPromise,
+  ])
 
   const { _avg, _count } = aggregate
 

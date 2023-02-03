@@ -26,10 +26,13 @@ describe('Journeys page', () => {
 
   it('ordering per column works', () => {
     const orderedPage = [
-      ['A.I. Virtasen aukio', 'Katariina Saksilaisen katu', '2.53', '11.63'],
-      ['A.I. Virtasen aukio', 'Rapakiventie', '5.78', '23.95'],
-      ['A.I. Virtasen aukio', 'Brahen puistikko', '2.15', '10.08'],
-      ['A.I. Virtasen aukio', 'Rautatientori / itä', '4.55', '27.17'],
+      [
+        'A.I. Virtasen aukio',
+        'A.I. Virtasen aukio',
+        'A.I. Virtasen aukio',
+        'A.I. Virtasen aukio',
+        'A.I. Virtasen aukio',
+      ],
     ]
 
     cy.get('[aria-label="order by column departureStationName"]').click()
