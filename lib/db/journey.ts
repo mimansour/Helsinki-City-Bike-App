@@ -114,7 +114,7 @@ export const getStatsByStationType = async (
   )
 
   return {
-    averageDistance: _avg.distance,
+    averageDistance: _avg.distance as number,
     totalJourneys: _count[type] as number,
     topStationsNames: topStations,
   }

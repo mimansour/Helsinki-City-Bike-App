@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getAllJourneys } from 'lib/db/journey'
-
-type Data = {}
+import { BikeJourney } from 'lib/types/journey'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<{ message: string } | BikeJourney[]>
 ) {
   if (req.method === 'GET') {
     const { skip, sortByHeader, filterBy } = req.query
