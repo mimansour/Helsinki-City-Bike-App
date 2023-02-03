@@ -29,8 +29,8 @@ export default function Navbar() {
         <Link href="/stations" className={linkStyle('/stations')}>
           Stations
         </Link>
-        <Link href="/journies" className={linkStyle('/journies')}>
-          Journies
+        <Link href="/journeys" className={linkStyle('/journeys')}>
+          Journeys
         </Link>
       </nav>
     </div>

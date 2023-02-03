@@ -1,4 +1,4 @@
-import JourniesStats from 'components/JourniesStats'
+import JourneysStats from 'components/JourneysStats'
 import { getJourneyStatsByStation } from 'lib/db/journey'
 import { getStationById } from 'lib/db/station'
 import { BikeStationStats } from 'lib/types/station'
@@ -61,13 +61,13 @@ function StationView({
           </span>
         </div>
         <hr className="w-48 h-1 mx-auto my-4 bg-amber-500 border-0 rounded md:my-10"></hr>
-        <JourniesStats
+        <JourneysStats
           stats={stationWithStats.departureStationsStats}
           isDeparture={true}
           stationName={stationName}
         />
         <hr className="w-48 h-1 mx-auto my-4 bg-amber-500 border-0 rounded md:my-10"></hr>
-        <JourniesStats
+        <JourneysStats
           stats={stationWithStats.returnStationsStats}
           isDeparture={false}
           stationName={stationName}

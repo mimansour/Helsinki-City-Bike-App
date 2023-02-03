@@ -2,14 +2,14 @@ import { Prisma } from '@prisma/client'
 import { BikeJourney, BikeJourneyParams } from '../types/journey'
 import prisma from './prisma'
 
-export const getAllJournies = async (
+export const getAllJourneys = async (
   params: BikeJourneyParams
 ): Promise<BikeJourney[]> => {
   const { skip, sortByHeader, filterBy } = params
   const PAGE_SIZE = 10
   const DEFAULT_SORT_DIRECTION = 'asc'
 
-  const journies = await prisma.journey.findMany({
+  const journeys = await prisma.journey.findMany({
     ...(skip && { skip: skip * PAGE_SIZE }),
     take: PAGE_SIZE,
     ...(sortByHeader && {
@@ -35,7 +35,7 @@ export const getAllJournies = async (
     }),
   })
 
-  return journies.map(({ departureDate, returnDate, ...rest }) => ({
+  return journeys.map(({ departureDate, returnDate, ...rest }) => ({
     departureDate: departureDate.toISOString(),
     returnDate: returnDate.toISOString(),
     ...rest,
@@ -115,17 +115,17 @@ export const getStatsByStationType = async (
 
   return {
     averageDistance: _avg.distance,
-    totalJournies: _count[type] as number,
+    totalJourneys: _count[type] as number,
     topStationsNames: topStations,
   }
 }
 
-export const insertManyJournies = (journies: BikeJourney[]) => {
+export const insertManyJourneys = (journeys: BikeJourney[]) => {
   return prisma.$executeRaw`
   INSERT INTO "Journey" ("departureDate", "returnDate", "departureStationId", "departureStationName", "returnStationId", "returnStationName" , "duration", "distance")
   VALUES
   ${Prisma.join(
-    journies.map(
+    journeys.map(
       ({
         departureDate,
         returnDate,

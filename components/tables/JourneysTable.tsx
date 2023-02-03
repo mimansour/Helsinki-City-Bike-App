@@ -8,7 +8,7 @@ import {
 import { Journey } from '@prisma/client'
 import ArrowIconButton from 'components/general/ArrowIconButton'
 
-export default function JourniesTable({
+export default function JourneysTable({
   data,
   columns,
   onSorting,
@@ -26,7 +26,7 @@ export default function JourniesTable({
   return (
     <div>
       <table className="text-left text-gray-500 shadow-sm">
-        <thead className="text-gray-700 uppercase bg-neutral-100">
+        <thead className="text-gray-700 uppercase bg-neutral-100 md:text-base text-xs">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -36,7 +36,7 @@ export default function JourniesTable({
                     colSpan={header.colSpan}
                     className="px-6 py-3"
                   >
-                    <div className="flex flex-row justify-between">
+                    <div className="flex md:gap-x-4">
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
@@ -54,7 +54,7 @@ export default function JourniesTable({
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="bg-white border-b">
+            <tr key={row.id} className="bg-white border-b md:text-base text-xs">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="px-6 py-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

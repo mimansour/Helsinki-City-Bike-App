@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getAllJournies } from 'lib/db/journey'
+import { getAllJourneys } from 'lib/db/journey'
 
 type Data = {}
 
@@ -20,12 +20,12 @@ export default async function handler(
 
     const skipNumber = Number(skip)
 
-    const journies = await getAllJournies({
+    const journeys = await getAllJourneys({
       skip: skipNumber,
       sortByHeader,
       filterBy,
     })
 
-    return res.status(200).json(journies)
+    return res.status(200).json(journeys)
   }
 }

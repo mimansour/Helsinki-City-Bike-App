@@ -1,31 +1,19 @@
 import { Journey } from '@prisma/client'
 
 export const testStats = {
-  returnStations: {
+  returnStationsStats: {
     averageDistance: 111,
-    totalJournies: 111,
-    topPopularStations: [
-      { departureStationName: 'Test1' },
-      { departureStationName: 'Test2' },
-      { departureStationName: 'Test3' },
-      { departureStationName: 'Test4' },
-      { departureStationName: 'Test5' },
-    ],
+    totalJourneys: 111,
+    topStationsNames: ['Test1', 'Test2', 'Test3', 'Test4', 'Test5'],
   },
-  departureStations: {
+  departureStationsStats: {
     averageDistance: 222,
-    totalJournies: 113,
-    topPopularStations: [
-      { returnStationName: 'Test6' },
-      { returnStationName: 'Test7' },
-      { returnStationName: 'Test8' },
-      { returnStationName: 'Test9' },
-      { returnStationName: 'Test10' },
-    ],
+    totalJourneys: 113,
+    topStationsNames: ['Test6', 'Test7', 'Test8', 'Test9', 'Test10'],
   },
 }
 
-export const testJournies = [
+export const testJourneys = [
   {
     id: 1,
     departureDate: new Date('2021-05-31T20:57:25.000Z'),
@@ -50,11 +38,11 @@ export const testJournies = [
   },
 ]
 
-const journiesToJsonData = (testJournies: Journey[]) =>
-  testJournies.map((journey) => ({
+const journeysToJsonData = (testJourneys: Journey[]) =>
+  testJourneys.map((journey) => ({
     ...journey,
     departureDate: journey.departureDate.toISOString(),
     returnDate: journey.returnDate.toISOString(),
   }))
 
-export const testJourniesJsonData = journiesToJsonData(testJournies)
+export const testJourneysJsonData = journeysToJsonData(testJourneys)

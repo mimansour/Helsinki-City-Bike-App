@@ -27,7 +27,7 @@ export const parseStations = () => {
   return result.filter(stationIsValid)
 }
 
-export const parseJournies = () => {
+export const parseJourneys = () => {
   const files = [
     '2021-05.csv',
     '2021-06-part1.csv',
@@ -37,12 +37,12 @@ export const parseJournies = () => {
   ]
 
   return files.reduce(
-    (journies, file) => [...journies, ...parseFileJournies(file)],
+    (journeys, file) => [...journeys, ...parseFileJourneys(file)],
     [] as BikeJourney[]
   )
 }
 
-export const parseFileJournies = (fileName: string) => {
+export const parseFileJourneys = (fileName: string) => {
   const headers = [
     'departureDate',
     'returnDate',
@@ -54,7 +54,7 @@ export const parseFileJournies = (fileName: string) => {
     'duration',
   ]
 
-  const file = getCsvFile('data/journies', fileName)
+  const file = getCsvFile('data/journeys', fileName)
   const result: BikeJourney[] = parseCsv(headers, file)
 
   return result.filter(journeyIsValid)
