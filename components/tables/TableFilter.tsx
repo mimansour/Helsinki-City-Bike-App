@@ -17,8 +17,7 @@ function TableFilter({
       value={columnFilterValue ?? ''}
       onChange={(e) => column.setFilterValue(e.target.value)}
       placeholder={'Search...'}
-      id={headerId}
-      aria-label={headerId}
+      aria-label={`search ${headerId}`}
       className="pl-2 w-36 text-sm font-normal text-gray-900 border shadow rounded-lg border-gray-300 focus:ring-amber-700 focus:border-amber-700 focus:outline-none focus:border-2"
     />
   )

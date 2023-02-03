@@ -42,7 +42,7 @@ export default function Journeys({ journeys }: { journeys: Journey[] }) {
     setJourneyData(journeyData.concat(newJourneyData))
   }
 
-  const onSorting = async (headerId?: any) => {
+  const onSorting = async (headerId?: string) => {
     const currentHeader = params.sortByHeader
     const newSortBy = headerId !== currentHeader ? headerId : undefined
     const newParams = { ...params, sortByHeader: newSortBy, skip: 0 }

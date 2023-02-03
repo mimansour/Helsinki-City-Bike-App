@@ -6,9 +6,9 @@ export default function Footer() {
         Made by <strong>Mira Mansour</strong>.
       </p>
       <p>
-        Images are from{' '}
+        Images are from
         <strong>
-          <a href="https://thenounproject.com/">The Noun Project</a>
+          <a href="https://thenounproject.com/"> The Noun Project</a>
         </strong>
         .
       </p>

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import searchIcon from '../../public/search.svg'
 
 const SearchInput = (props: {
-  value: string | undefined
+  value?: string
   onFilterChange: (value: string) => Promise<void>
 }) => (
   <div className="relative mt-1 py-4">
@@ -11,8 +11,7 @@ const SearchInput = (props: {
     </div>
     <input
       type="text"
-      id="table-search"
-      aria-label="search"
+      aria-label="search station"
       className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-white focus:ring-amber-700 focus:border-amber-700 focus:outline-none"
       placeholder="Search station"
       value={props.value}

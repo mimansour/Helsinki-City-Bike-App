@@ -3,12 +3,12 @@ describe('Home Page', () => {
     cy.visit('http://localhost:3000')
   })
 
-  it('should render home page and footer', () => {
+  it('renders home page and footer', () => {
     cy.get('h1').contains('Helsinki City Bike App')
     cy.get('footer').contains('Copyright ©2023.')
   })
 
-  it('navbar links work', () => {
+  it('navbar links navigate to correct pages', () => {
     cy.contains('Stations').click()
     cy.get('h1').contains('Stations')
     cy.contains('Name')

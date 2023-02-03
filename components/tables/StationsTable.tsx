@@ -65,12 +65,10 @@ export default function StationsTable({
                         </div>
 
                         {header.column.getCanFilter() ? (
-                          <div>
-                            <TableFilter
-                              column={header.column}
-                              headerId={header.id}
-                            />
-                          </div>
+                          <TableFilter
+                            column={header.column}
+                            headerId={header.id}
+                          />
                         ) : null}
                       </div>
                     )}

@@ -3,7 +3,7 @@ import ChevronRightIcon from 'components/general/ChevronRightIcon'
 import Link from 'next/link'
 import StationsTable, { createColumnHelper } from './StationsTable'
 
-const StationsTableContainer = (props: { data: any }) => {
+const StationsTableContainer = (props: { data: Station[] }) => {
   const columnHelper = createColumnHelper<Station>()
 
   const columns = [

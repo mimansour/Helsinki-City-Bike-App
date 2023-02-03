@@ -33,3 +33,55 @@ const testStationB = {
 }
 
 export const testStations = [testStationA, testStationB]
+
+export const namesPage1 = [
+  'Hanasaari',
+  'Keilalahti',
+  'Westendinasema',
+  'Golfpolku',
+  'Revontulentie',
+  'Sateentie',
+  'Hakalehto',
+  'Oravannahkatori',
+  'Länsituuli',
+  'Tuulimäki',
+]
+
+export const namesPage2 = [
+  'Tapionaukio',
+  'Kulttuuriaukio',
+  'Ahertajantie',
+  'Mäntyviita',
+  'Otsolahti',
+  'Keilaniemi (M)',
+  'Keilaranta',
+  'Betonimies',
+  'Tekniikantie',
+  'Innopoli',
+]
+
+export const orderedDescNames = [
+  'A.I. Virtasen aukio',
+  'Aalto-yliopisto (M), Korkea',
+  'Aalto-yliopisto (M), Tietot',
+  'Abraham Wetterin tie',
+  'Agnetankuja',
+  'Agronominkatu',
+  'Ahertajantie',
+  'Ajomiehentie',
+  'Ala-Malmin tori',
+  'Alakiventie',
+]
+
+export const orderedAscNames = [
+  'Ympyrätalo',
+  'Yhdyskunnankuja',
+  'Westendintie',
+  'Westendinasema',
+  'Väärämäentie',
+  'Välimerenkatu',
+  'Vähäntuvantie',
+  'Vuosaaren puistopolku',
+  'Vuosaaren liikuntapuisto',
+  'Von Daehnin katu',
+]
