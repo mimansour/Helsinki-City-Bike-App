@@ -12,7 +12,7 @@ describe('Home page', () => {
     expect(title).toBeDefined()
   })
 
-  it('renders links', async () => {
+  it('renders the link', async () => {
     const stationsLink = screen.getByRole('link', { name: 'Get started' })
     expect(stationsLink).toBeInTheDocument()
     expect(stationsLink).toHaveAttribute('href', '/stations')
