@@ -119,33 +119,3 @@ export const getStatsByStationType = async (
     topStationsNames: topStations,
   }
 }
-
-export const insertManyJourneys = (journeys: BikeJourney[]) => {
-  return prisma.$executeRaw`
-  INSERT INTO "Journey" ("departureDate", "returnDate", "departureStationId", "departureStationName", "returnStationId", "returnStationName" , "duration", "distance")
-  VALUES
-  ${Prisma.join(
-    journeys.map(
-      ({
-        departureDate,
-        returnDate,
-        departureStationId,
-        departureStationName,
-        returnStationId,
-        returnStationName,
-        distance,
-        duration,
-      }) =>
-        Prisma.sql`(${Prisma.join([
-          departureDate,
-          returnDate,
-          departureStationId,
-          departureStationName,
-          returnStationId,
-          returnStationName,
-          duration,
-          distance,
-        ])})`
-    )
-  )};`
-}

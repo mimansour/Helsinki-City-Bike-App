@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { BikeJourney } from '../types/journey'
 import { parseJourneys, parseStations } from '../utils/csv'
-import { insertManyJourneys } from './journey'
 
 const prisma = new PrismaClient()
 
@@ -30,7 +29,7 @@ const addBikeJourneyDataToDb = async () => {
 
   for await (const [index, chunk] of journeysChunks.entries()) {
     try {
-      await insertManyJourneys(chunk)
+      await prisma.journey.createMany({ data: chunk })
       console.log(`Chunk ${index + 1} / ${journeysChunks.length} is added`)
     } catch (error) {
       console.log(
@@ -47,14 +46,10 @@ const addBikeStationDataToDb = async () => {
   const stations = parseStations()
   console.log('Stations parsed successfully!')
 
-  const stationsCreateQueries = stations.map((data) =>
-    prisma.station.create({ data })
-  )
-
   console.log(`Adding ${stations.length} stations.`)
 
   try {
-    const createdStations = await prisma.$transaction(stationsCreateQueries)
+    const createdStations = await prisma.station.createMany({ data: stations })
 
     console.log('Stations saved to DB successfully!')
 
