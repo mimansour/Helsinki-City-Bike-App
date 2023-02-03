@@ -154,6 +154,6 @@ Prettier auto-formatting is also used in the application. You can run `npm run f
 
 The application could be developed furter by linking SQL tables together. Currently SQL tables are not linked. Also the database url could be changed to a dynamic url based on env. Currently the database url is hardcoded.
 
-The journies table currently supports ordering per column only in ascending order. The table could be developed further by adding also option for descending order sorting. However the stations table supports ordering in both ascending and descending order.
+The journeys table currently supports ordering per column only in ascending order. The table could be developed further by adding also option for descending order sorting. However the stations table supports ordering in both ascending and descending order.
 
 The application could also be developed further for example by adding forms and new endpoints to add new journeys or stations data. Currently the database is read-only.
