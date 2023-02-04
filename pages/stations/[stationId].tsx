@@ -32,8 +32,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-export const fetcher = (url: string) => fetch(url).then((res) => res.json())
-
 function StationView({
   stationWithStats,
 }: {

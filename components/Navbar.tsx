@@ -13,7 +13,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="flex flex-col justify-center md:flex-row md:justify-between items-center md:px-4">
+    <header className="flex flex-col justify-center md:flex-row md:justify-between items-center md:px-4">
       <Link href="/">
         <Image
           className="w-60 my-4"
@@ -33,6 +33,6 @@ export default function Navbar() {
           Journeys
         </Link>
       </nav>
-    </div>
+    </header>
   )
 }
