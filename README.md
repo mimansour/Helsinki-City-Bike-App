@@ -62,7 +62,7 @@ Others:
 
 ## Prerequisites
 
-[Node](https://nodejs.org/en/) and npm are needed to run the project. The application development was done using Node version 19.4.0 and npm version 9.2.0.
+[Node](https://nodejs.org/en/) and npm are needed to run the project. The application development was done using Node version 19.4.0 and npm version 9.2.0. If you want to setup the database locally, [Docker](https://www.docker.com/) is also needed.
 
 ## Configurations
 
@@ -86,7 +86,13 @@ Currently PostgreSQL is used as the main database in the application. The applic
 
 If needed, you can set up a local database as follows:
 
-First you need to run a PostgreSQL instance locally using Docker:
+First you need to update the .env file with the following:
+
+```bash
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres"
+```
+
+Afterwards you need to run a PostgreSQL instance locally using Docker:
 
 ```bash
 docker-compose up
